@@ -1,12 +1,3 @@
-typedef struct{
-
-	int posXfinal;
-	int posYfinal;
-	int posXcomida;
-	int posYcomida;
-
-} PATH;
-
 PATH *possiblePaths = calloc(100*100, sizeof(PATH)); // alocar uma matriz caminho de 100x100 com o do tipo PATH.
 
 
