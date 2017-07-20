@@ -1,5 +1,5 @@
 #include "possiblePaths.c"
-
+#include "funcoes_do_jogo.c"
 
 typedef struct{
 
@@ -10,5 +10,9 @@ typedef struct{
 
 } PATH;
 
+typedef struct {
+	int tipo;
+	int energia;
+}	BOARD;
 
 void PossiblePaths(int posAtualX , int posAtualY);
