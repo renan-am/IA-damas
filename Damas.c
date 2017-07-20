@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "module1.h"
+#include "module.h"
 
 #define COL_MAX 8
 #define LIN_MAX 8
