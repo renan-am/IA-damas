@@ -47,7 +47,7 @@ int main (){
 						break;
 			}
 			while (true){	// pede as coordenadas de DESTINO da pedra a ser movida, em seguida checa se ja existe uma pedra nesse local
-				while ( 1 == 1){
+				while ( true){
 					printf ("Digite a coluna de destino: ");
 					scanf ("%d", &c_destino);
 					c_destino--;
