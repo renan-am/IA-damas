@@ -19,9 +19,9 @@ int main (){
 		imprimir();
 
 
-	
-			while (true){	// pede as coordenadas de ORIGEM da pedra a ser movida, em seguida checa se estao no intervalo correto e se essa coordenada representa o local de uma pedra
-					while (true){
+		
+			while (1){	// pede as coordenadas de ORIGEM da pedra a ser movida, em seguida checa se estao no intervalo correto e se essa coordenada representa o local de uma pedra
+					while (1){
 						printf ("Digite a coluna da pedra a ser movida: ");
 						scanf ("%d", &c_origem);
 						c_origem--;
@@ -31,7 +31,7 @@ int main (){
 							break;
 					}
 
-					while (true){
+					while (1){
 						printf ("Digite a linha da pedra a ser movida: ");
 						scanf ("%d", &l_origem);
 						l_origem--;
@@ -46,8 +46,8 @@ int main (){
 					else
 						break;
 			}
-			while (true){	// pede as coordenadas de DESTINO da pedra a ser movida, em seguida checa se ja existe uma pedra nesse local
-				while ( true){
+			while (1){	// pede as coordenadas de DESTINO da pedra a ser movida, em seguida checa se ja existe uma pedra nesse local
+				while ( 1){
 					printf ("Digite a coluna de destino: ");
 					scanf ("%d", &c_destino);
 					c_destino--;
@@ -57,7 +57,7 @@ int main (){
 						break;
 				}
 
-				while (true){
+				while (1){
 					printf ("Digite a linha de destino: ");
 					scanf ("%d", &l_destino);
 					l_destino--;
