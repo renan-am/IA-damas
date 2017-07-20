@@ -1,6 +1,3 @@
-#include "possiblePaths.c"
-#include "funcoes_do_jogo.c"
-
 #define COL_MAX 8
 #define LIN_MAX 8
 #define POS linha*COL_MAX+coluna
@@ -28,16 +25,4 @@ extern int game;
 
 
 
-void PossiblePaths(int posAtualX , int posAtualY);
 
-
-void posicionarpedras ();
-
-
-void mover (int c_origem, int l_origem, int c_destino, int l_destino);
-
-
-int checarSeCome (int c_origem, int l_origem, int c_alvo, int l_alvo);
-
-
-void imprimir ();

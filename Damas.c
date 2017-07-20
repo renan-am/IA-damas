@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "module.h"
-
-
+#include "func_declarations.h"
 
 BOARD *tabuleiro;
 
