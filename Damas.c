@@ -2,10 +2,7 @@
 #include <stdlib.h>
 #include "module.h"
 
-#define COL_MAX 8
-#define LIN_MAX 8
 
-#define POS linha*COL_MAX+coluna
 
 BOARD *tabuleiro;
 

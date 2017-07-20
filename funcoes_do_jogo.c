@@ -3,7 +3,6 @@
 #include "module.h"
 
 
-
 void posicionarpedras (){
 	int linha, coluna;
 

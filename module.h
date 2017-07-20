@@ -1,7 +1,11 @@
 #include "possiblePaths.c"
 #include "funcoes_do_jogo.c"
 
-typedef struct{
+#define COL_MAX 8
+#define LIN_MAX 8
+#define POS linha*COL_MAX+coluna
+
+typedef struct {
 
 	int posXfinal;
 	int posYfinal;
@@ -11,8 +15,29 @@ typedef struct{
 } PATH;
 
 typedef struct {
+
 	int tipo;
 	int energia;
-}	BOARD;
+
+} BOARD;
+
+
+
+extern BOARD *tabuleiro;
+extern int game; 
+
+
 
 void PossiblePaths(int posAtualX , int posAtualY);
+
+
+void posicionarpedras ();
+
+
+void mover (int c_origem, int l_origem, int c_destino, int l_destino);
+
+
+int checarSeCome (int c_origem, int l_origem, int c_alvo, int l_alvo);
+
+
+void imprimir ();
