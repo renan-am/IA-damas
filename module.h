@@ -13,15 +13,16 @@ typedef struct {
 
 typedef struct {
 
-	int tipo;
-	int energia;
+	int tipo;     // 0: vazio      1: pedra do jogador 1   2: pedra do jogador 2
+	int classe; 	//1: pedra comum      2: dama
+	int potencial;
 
 } BOARD;
 
 
 
 extern BOARD *tabuleiro;
-extern int game; 
+extern int game;
 
 
 
