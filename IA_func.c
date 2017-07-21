@@ -3,6 +3,12 @@
 #include <func_declarations.h>
 
 
-int distancia (int c_origem){  //retorna quantas jogadas de movimento sao necessárias para chegar no fim do tabuleiro, valor + : distancia desobstruida, valor - : distancia obstruida 
-
+int distancia (int l_origem, int tipo){  //retorna quantas linhas até a pedra virar damas (fim do tabuleiro)
+	if (tipo == 1)
+		return l_origem; 
+	else if (tipo == 2)
+		return (LIN_MAX - l_origem);
+	else
+		printf ("func distancia recebeu tipo invalido (%d)", int tipo);
+		return -1;
 }

@@ -13,7 +13,7 @@ typedef struct {
 
 typedef struct {
 
-	int tipo;     // 0: vazio      1: pedra do jogador 1   2: pedra do jogador 2
+	int tipo;     // 0: vazio      1: pedra do jogador 1 (superior)   2: pedra do jogador 2 (inferior)
 	int classe; 	//1: pedra comum      2: dama
 	int potencial;
 
