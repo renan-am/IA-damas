@@ -3,13 +3,15 @@
 #include "module.h"
 #include "func_declarations.h"
 
-BOARD *tabuleiro;
+
 
 int game = 1;
 
 int main (){
+
+	BOARD *tabuleiro;
 	tabuleiro = calloc (COL_MAX*LIN_MAX, sizeof(BOARD));
-	posicionarpedras();
+	posicionarpedras(tabuleiro);
 	
 	int c_origem = 0, l_origem = 0, c_destino = 0, l_destino = 0;
 	char acao;
@@ -18,7 +20,7 @@ int main (){
 	while (game == 1){
 
 		system ("tput reset");
-		imprimir();
+		imprimir(tabuleiro);
 
 
 		
@@ -82,7 +84,7 @@ int main (){
 					break;
 			} //Loop de movimento
 
-			mover (c_origem, l_origem, c_destino, l_destino);
+			mover (tabuleiro, c_origem, l_origem, c_destino, l_destino);
 		}
 
 		else if (acao == 'C' || acao == 'c'){ //loop de captura

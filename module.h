@@ -21,7 +21,6 @@ typedef struct {
 
 
 
-extern BOARD *tabuleiro;
 extern int game;
 
 

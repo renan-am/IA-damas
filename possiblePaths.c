@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "module.h"
+#include "func_declarations.h"
 
 PATH *possiblePaths = calloc(100*100, sizeof(PATH)); // alocar uma matriz caminho de 100x100 com o do tipo PATH.
 

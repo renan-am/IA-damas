@@ -1,3 +1,5 @@
+#pragma once   //impede arquivo ser "included" varias vezes, evitando erro de multipla definição
+
 #include "game_functions.c"
 //#include "possiblePaths.c"
 
