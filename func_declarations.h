@@ -6,13 +6,13 @@
 void PossiblePaths(int posAtualX , int posAtualY);
 
 
-void posicionarpedras ();
+void posicionarpedras (BOARD *tab);
 
 
-void mover (int c_origem, int l_origem, int c_destino, int l_destino);
+void mover (BOARD *tab, int c_origem, int l_origem, int c_destino, int l_destino);
 
 
-int checarSeCome (int c_origem, int l_origem, int c_alvo, int l_alvo);
+int checarSeCome (BOARD *tab, int c_origem, int l_origem, int c_alvo, int l_alvo);
 
 
-void imprimir ();
+void imprimir (BOARD *tab);
