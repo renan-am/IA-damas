@@ -12,6 +12,8 @@ int main (){
 	posicionarpedras();
 	
 	int c_origem = 0, l_origem = 0, c_destino = 0, l_destino = 0;
+	char acao;
+
 
 	while (game == 1){
 
@@ -20,6 +22,11 @@ int main (){
 
 
 		
+
+		printf ("Mover ou Capturar? (M/C): ");
+		scanf (" %c", &acao);
+
+		if (acao == 'M' || acao == 'm'){
 			while (1){	// pede as coordenadas de ORIGEM da pedra a ser movida, em seguida checa se estao no intervalo correto e se essa coordenada representa o local de uma pedra
 					while (1){
 						printf ("Digite a coluna da pedra a ser movida: ");
@@ -73,9 +80,21 @@ int main (){
 					printf ("Local de destino invalido. Digite uma posicao valida\n");
 				else
 					break;
-			}
+			} //Loop de movimento
 
-		mover (c_origem, l_origem, c_destino, l_destino);
+			mover (c_origem, l_origem, c_destino, l_destino);
+		}
+
+		else if (acao == 'C' || acao == 'c'){ //loop de captura
+		}
+
+		else {
+			printf ("entrada invalida\n");
+			getchar ();
+			getchar ();
+		}
+
+		
 
 
 	}
