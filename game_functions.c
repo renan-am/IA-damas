@@ -19,6 +19,9 @@ void posicionarpedras (BOARD *tab){   //inicializa o tabuleiro, com pedras tipo 
 		for (coluna = (linha+1)%2; coluna < COL_MAX; coluna += 2){	// (linha+1) % 2 garante que as casas serão alternadas, ex: 1ª linha as casas pretas começam na 2ª coluna, 2ª linha começam na 1ª coluna, etc.
 			tab[POS].tipo = 2;
 		}
+	for (linha = 0; linha < LIN_MAX; linha++)
+			for (coluna = linha%2; coluna < COL_MAX; coluna += 2)
+				tab[POS].tipo = -1;
 }
 
 void mover (BOARD *tab, int c_origem, int l_origem, int c_destino, int l_destino){    //move pedra da posicao de origem para a posiçao destino no tabuleiro *tab
@@ -26,6 +29,13 @@ void mover (BOARD *tab, int c_origem, int l_origem, int c_destino, int l_destino
 	aux = tab[l_origem*COL_MAX+c_origem].tipo;
 	tab[l_origem*COL_MAX+c_origem].tipo = tab[l_destino*COL_MAX+c_destino].tipo;
 	tab[l_destino*COL_MAX+c_destino].tipo = aux;
+}
+
+int validar (BOARD *tab, int coluna, int linha){
+	if (coluna < 0 || coluna >= COL_MAX || linha < 0 || linha >= LIN_MAX)
+		return -2;
+	else
+		return tab[POS].tipo;
 }
 
 int checarSeCome (BOARD *tab, int c_origem, int l_origem, int c_alvo, int l_alvo, int tipo){    // retorna 0 se a pedra nao puder ser comida, retorna 1 se puder. se int tipo = 0, sera usado o tipo da posicao de origem
@@ -69,12 +79,16 @@ void imprimir (BOARD *tab){ // imprime tabuleiro e legenda das linhas e colunas
 			}
 
 
-			if (tab[POS].tipo != 0){     //imprime as pedras e substitui 0 por espaços em branco
-				printf ("%d ", tab[POS].tipo);
+			if (tab[POS].tipo > 0){     //imprime as pedras e substitui 0 por espaços em branco
+				printf ("%.1d ", tab[POS].tipo);
 			} else {
 				printf("  ");
 			}
 		}
-		printf("  %d\n", linha+1);
+		if (linha == LIN_MAX+1)
+			printf ("\n");
+		else
+			printf("  %d\n", linha+1);
+
 	}  
 }
