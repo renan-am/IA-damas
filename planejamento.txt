@@ -1,0 +1,32 @@
+input básico:
+
+- coordenadas das pedras
+
+input movimento: 
+
+- coordenada inicial do movimento
+
+- coodernada final do movimento
+
+input captura:
+
+- saldo de captura
+
+- coordenadas das pedras a serem comidas
+
+- posição final das pedras
+
+Parametros:
+
+ - Ofensivo:
+        - qts pedra o inimigo vai comer, depois eu, depois ele, até nao dar mais
+        - Distancia até o fim do tabuleiro (virar dama), desconsiderar para dama.
+
+- Defensivo:
+        - qtd de pedras protegidas ("testa se pode comer ela, se puder essa pedra a esta protegendo"
+        
+
+        - EFEITO NO TABULEIRO (calcular separadamente no resto):Diminuir potencial inimigo (delta)
+       
+
+simulação: checar no mínimo duas rodadas a frente (sua jogada + jogada do inimigo)
