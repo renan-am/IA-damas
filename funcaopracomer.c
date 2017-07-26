@@ -8,7 +8,7 @@
 static PATH *auxWaysToWin; // vetor auxiliar com o caminho atual.
 PATH **waysToWin;//matriz que vai guardar os caminhos possiveis.
 
-static tamanho[100];
+static int *tamanho;
 
 static int possiblePathsX[possibilitiesSize] = {1, -1, -1, 1};//deve ser global
 static int possiblePathsY[possibilitiesSize] = {-1, -1, 1, 1};//deve ser global
@@ -74,6 +74,7 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 PATH **EncontrarCaminho (BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i){
 		auxWaysToWin = calloc(100, sizeof(PATH));
 		waysToWin = calloc(100,sizeof(PATH*));
+		tamanho = calloc (100, sizeof(int));
 
 		for(int i = 0; i < 100; i++)
 			waysToWin[i] = calloc(100,sizeof(PATH));
@@ -81,7 +82,7 @@ PATH **EncontrarCaminho (BOARD *tabuleiro ,int posAtualX , int posAtualY, int ty
 		PossiblePaths (tabuleiro, posAtualX, posAtualY, type, i);
 
 		int maximo = 0;
-		int *indMAX;
+     	int *indMAX =NULL;
 
 
 		for (int i = 0; i <100; i++){
@@ -90,15 +91,22 @@ PATH **EncontrarCaminho (BOARD *tabuleiro ,int posAtualX , int posAtualY, int ty
 			}
 		}
 
-		for (int i = 0, int k =0; i<100; i++)
-			if (tamanho[i] == maximo)
-				indMAX[k++] = i; 
+		indMAX = calloc (100, sizeof(int));
+
+		int k = 0;
+		for (int i = 0; i<100; i++)
+			if (tamanho[i] == maximo){
+				indMAX[k] = i;
+				k++; 
+			}
 
 		PATH **best;
-		best = calloc (k-1, sizeof(PATH*));
+		best = calloc (100, sizeof(PATH*));
 
-		for (i = 0; i<k; i++)
-			best[i] = calloc (maximo+1, sizeof(PATH));
+
+
+		for (i = 0; i<100; i++)
+			best[i] = calloc (50, sizeof(PATH));
 
 		for (i = 0; i< k; i++)
 			for (int j = 0; j<maximo+1; j++){
@@ -108,14 +116,17 @@ PATH **EncontrarCaminho (BOARD *tabuleiro ,int posAtualX , int posAtualY, int ty
 				best[i][j].posYcomida = waysToWin[indMAX[i]][j].posYcomida;
 			}
 
+
 		free (waysToWin);
 		free (auxWaysToWin);
 		free (indMAX);
+		free (tamanho);
 
 		waySize = 0;
 		counterWays = 0;
 
-		return **best;
+		printf ("%d \n", best[0][0].posXcomida);
+		return best;
 
 
 }

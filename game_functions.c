@@ -61,7 +61,12 @@ int checarSeCome (BOARD *tab, int c_origem, int l_origem, int c_alvo, int l_alvo
 }
 
 
-void comer (int c_origem, int l_origem, int c_destino, int l_destino){
+void remover (BOARD *tab, PATH *pedrascomidas){
+	int i = 0;
+	while (pedrascomidas[i].posXcomida != 0 && pedrascomidas[i].posYcomida != 0){
+		tab[pedrascomidas[i].posYcomida * COL_MAX + pedrascomidas[i].posXcomida].tipo = 0;
+		i++;
+	}
 }
 
 

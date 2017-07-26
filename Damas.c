@@ -3,36 +3,32 @@
 #include "module.h"
 #include "func_declarations.h"
 
-
-
 int game = 1;
 int turno = 2;  //a vez de qual jogador, inicializar com o valor do primeiro jogador
 
-BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, int *pedrascomidas){
+BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *pedrascomidas){
 	static int jogoiniciou = 0;     //inicializa tabuleiro somente uma vez
 	static BOARD *tabuleiro;
 
 
 	if (!jogoiniciou){
 		tabuleiro = calloc (COL_MAX*LIN_MAX, sizeof(BOARD));
-		posicionarpedras(tabuleiro);
+		//posicionarpedras(tabuleiro);
 
 
-		/*int vet[COL_MAX*LIN_MAX] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-									0, 0, 0, 0, 2, 0, 2, 0, 2, 0,
-									0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-									0, 0, 0, 0, 2, 0, 2, 0, 2, 0,
-									0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-									0, 0, 2, 0, 2, 0, 0, 0, 2, 0,
-									0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
-									0, 0, 0, 0, 0, 0, 0, 0, 2, 0,
-									0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-									0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-									};*/
+		int vet[COL_MAX*LIN_MAX] = {0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 2, 0, 2, 0,
+									0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 2, 0, 2, 0,
+									0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 2, 0, 2, 0, 0, 0,
+									0, 0, 0, 1, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0,
+									};
 
-		/*for (int linha = 0; linha < LIN_MAX; linha++)
+		for (int linha = 0; linha < LIN_MAX; linha++)
 			for (int coluna = 0; coluna < COL_MAX; coluna++)
-				tabuleiro[POS].tipo = vet[POS];*/
+				tabuleiro[POS].tipo = vet[POS];
 
 
 		
@@ -56,9 +52,9 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, int *pedr
 	turno = (turno%2)+1;
 
 
-	if (!pedrascomidas){
-		//checar o maior caminho ....
-		//comer (); ...
+	if (pedrascomidas){
+		remover (tabuleiro, pedrascomidas);
+
 	}
 
 	system ("tput reset");
@@ -69,7 +65,7 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, int *pedr
 
 
 int main (){
-
+	int i, j;
 	int c_origem = 0, l_origem = 0, c_destino = 0, l_destino = 0;
 	int track = 0; //caminho escolhido pelo jogador para comer as pedras
 	char acao;
@@ -153,17 +149,17 @@ int main (){
 
 			maiorcaminho = EncontrarCaminho (tab, c_origem, l_origem, 1, -1);
 
-			Printf ("Escolha o caminho a ser serguido: ")
+			printf ("Escolha o caminho a ser serguido: \n");
 			
 			for (int i = 0; i < 100; i++){
 				if (maiorcaminho[i][0].posXcomida == 0 && maiorcaminho[i][0].posYcomida == 0){
-						//printf ("morreu aqui 2\n");
+					//printf ("morreu aqui 2\n");
 						break;
 					}
 				printf ("caminho %d\n", i+1);
 				for (int j = 0; j<20; j++){
 					if (maiorcaminho[i][j].posXcomida == 0 && maiorcaminho[i][j].posYcomida == 0){
-						//printf ("morreu aqui 2\n");
+						//printf ("morreu aqui 3\n");
 						break;
 					}
 					else
@@ -173,8 +169,16 @@ int main (){
 			}
 
 			scanf ("%d", &track);
-
+			track--;
+			for (i = 0; i< 100; i++){
+				if (maiorcaminho[track][i].posXcomida == 0 && maiorcaminho[track][i].posYcomida == 0){	
+					i--;
+					break;
+				}
+			}
 			
+			tab = GAME (c_origem, l_origem, maiorcaminho[track][i].posXfinal, maiorcaminho[track][i].posYfinal, maiorcaminho[track]);
+			free (maiorcaminho);
 
 
 		}
