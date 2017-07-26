@@ -54,7 +54,6 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 
 	if (pedrascomidas){
 		remover (tabuleiro, pedrascomidas);
-
 	}
 
 	system ("tput reset");
@@ -147,7 +146,7 @@ int main (){
 
 			PATH **maiorcaminho = NULL;
 
-			maiorcaminho = EncontrarCaminho (tab, c_origem, l_origem, 1, -1);
+			maiorcaminho = EncontrarCaminho (tab, c_origem, l_origem, tab[l_origem*COL_MAX+c_origem].tipo, -1);
 
 			printf ("Escolha o caminho a ser serguido: \n");
 			

@@ -125,7 +125,6 @@ PATH **EncontrarCaminho (BOARD *tabuleiro ,int posAtualX , int posAtualY, int ty
 		waySize = 0;
 		counterWays = 0;
 
-		printf ("%d \n", best[0][0].posXcomida);
 		return best;
 
 
