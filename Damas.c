@@ -16,6 +16,27 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, int *pedr
 	if (!jogoiniciou){
 		tabuleiro = calloc (COL_MAX*LIN_MAX, sizeof(BOARD));
 		posicionarpedras(tabuleiro);
+
+
+		/*int vet[COL_MAX*LIN_MAX] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 2, 0, 2, 0, 2, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 2, 0, 2, 0, 2, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 2, 0, 2, 0, 0, 0, 2, 0,
+									0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 2, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									};*/
+
+		/*for (int linha = 0; linha < LIN_MAX; linha++)
+			for (int coluna = 0; coluna < COL_MAX; coluna++)
+				tabuleiro[POS].tipo = vet[POS];*/
+
+
+		
+
 		jogoiniciou = 1;
 		system ("tput reset");
 		imprimir(tabuleiro);
@@ -34,7 +55,9 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, int *pedr
 	mover (tabuleiro, c_origem, l_origem, c_destino, l_destino);
 	turno = (turno%2)+1;
 
+
 	if (!pedrascomidas){
+		//checar o maior caminho ....
 		//comer (); ...
 	}
 
@@ -118,6 +141,32 @@ int main (){
 		}
 
 		else if (acao == 'C' || acao == 'c'){ //loop de captura
+			printf ("digite x origem: ");
+			scanf ("%d", &c_origem);
+			c_origem--;
+			printf ("digite y origem: ");
+			scanf ("%d", &l_origem);
+			l_origem--;
+
+			PossiblePaths (tab, c_origem, l_origem, 1, -1);
+
+			for (int i = 0; i < 100; i++){
+				if (waysToWin[i][0].posXcomida == 0 && waysToWin[i][0].posYcomida == 0){
+						//printf ("morreu aqui 2\n");
+						break;
+					}
+				printf ("caminho %d\n", i+1);
+				for (int j = 0; j<20; j++){
+					if (waysToWin[i][j].posXcomida == 0 && waysToWin[i][j].posYcomida == 0){
+						//printf ("morreu aqui 2\n");
+						break;
+					}
+					else
+						printf ("passa por (%d, %d), come (%d, %d) ", waysToWin[i][j].posXfinal + 1, waysToWin[i][j].posYfinal + 1, waysToWin[i][j].posXcomida + 1, waysToWin[i][j].posYcomida + 1);
+				}
+				printf ("\n");
+			}
+
 		}
 
 		else {

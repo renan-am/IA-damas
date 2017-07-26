@@ -43,10 +43,14 @@ int checarSeCome (BOARD *tab, int c_origem, int l_origem, int c_alvo, int l_alvo
 		tipo = tab[l_origem*COL_MAX+c_origem].tipo;
 
 	int c_final = 0, l_final = 0;
-	c_final = 2 * c_alvo - c_origem;
-	l_final = 2 * l_alvo - l_origem;
+	c_final = 2 * c_alvo - c_origem; 
+	l_final = 2 * l_alvo - l_origem; 
 
-	if (tipo == tab[l_alvo*COL_MAX+c_alvo].tipo)
+	if (c_final < 0 || l_final < 0)
+		return 0;
+	else if (tab[l_alvo*COL_MAX+c_alvo].tipo <= 0)
+		return 0;
+	else if (tipo == tab[l_alvo*COL_MAX+c_alvo].tipo)
 		return 0;
 	else if (c_final < 0 || l_final < 0 || c_final >= COL_MAX || l_final >= LIN_MAX)
 		return 0;

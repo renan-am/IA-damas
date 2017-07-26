@@ -2,8 +2,7 @@
 
 #include "game_functions.c"
 //#include "possiblePaths.c"
-
-void PossiblePaths(int posAtualX , int posAtualY);
+#include "funcaopracomer.c"
 
 
 void posicionarpedras (BOARD *tab);    //inicializa o tabuleiro, com pedras tipo 1 na parte superior e tipo 2 na parte inferior
@@ -21,3 +20,9 @@ void imprimir (BOARD *tab);    // imprime tabuleiro e legenda das linhas e colun
 
 
 int distancia (int l_origem, int tipo);   //retorna quantas linhas até a pedra virar damas (fim do tabuleiro)
+
+
+
+int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i);
+
+void saveWay(PATH *auxWay, int auxSize, PATH **bankOfWays, int counterWays);
