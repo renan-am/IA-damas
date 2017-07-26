@@ -71,6 +71,7 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, int *pedr
 int main (){
 
 	int c_origem = 0, l_origem = 0, c_destino = 0, l_destino = 0;
+	int track = 0; //caminho escolhido pelo jogador para comer as pedras
 	char acao;
 	BOARD *tab = NULL;
 
@@ -148,24 +149,33 @@ int main (){
 			scanf ("%d", &l_origem);
 			l_origem--;
 
-			PossiblePaths (tab, c_origem, l_origem, 1, -1);
+			PATH **maiorcaminho = NULL;
 
+			maiorcaminho = EncontrarCaminho (tab, c_origem, l_origem, 1, -1);
+
+			Printf ("Escolha o caminho a ser serguido: ")
+			
 			for (int i = 0; i < 100; i++){
-				if (waysToWin[i][0].posXcomida == 0 && waysToWin[i][0].posYcomida == 0){
+				if (maiorcaminho[i][0].posXcomida == 0 && maiorcaminho[i][0].posYcomida == 0){
 						//printf ("morreu aqui 2\n");
 						break;
 					}
 				printf ("caminho %d\n", i+1);
 				for (int j = 0; j<20; j++){
-					if (waysToWin[i][j].posXcomida == 0 && waysToWin[i][j].posYcomida == 0){
+					if (maiorcaminho[i][j].posXcomida == 0 && maiorcaminho[i][j].posYcomida == 0){
 						//printf ("morreu aqui 2\n");
 						break;
 					}
 					else
-						printf ("passa por (%d, %d), come (%d, %d) ", waysToWin[i][j].posXfinal + 1, waysToWin[i][j].posYfinal + 1, waysToWin[i][j].posXcomida + 1, waysToWin[i][j].posYcomida + 1);
+						printf ("passa por (%d, %d), come (%d, %d) ", maiorcaminho[i][j].posXfinal + 1, maiorcaminho[i][j].posYfinal + 1, maiorcaminho[i][j].posXcomida + 1, maiorcaminho[i][j].posYcomida + 1);
 				}
-				printf ("\n");
+				printf ("\n"); // imprime os caminhos
 			}
+
+			scanf ("%d", &track);
+
+			
+
 
 		}
 
