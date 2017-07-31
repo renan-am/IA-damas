@@ -53,6 +53,7 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 				auxWaysToWin[waySize].posYcomida = posAtualY+possiblePathsY[i];
 				waySize++;
 
+				//muda o tipo da pedra comida pra evitar ignorar as pedras comidas
 				aux = vet[(posAtualY + possiblePathsY[i]) * COL_MAX + posAtualX+possiblePathsX[i]].tipo;
 				vet[(posAtualY+possiblePathsY[i]) * COL_MAX + posAtualX+possiblePathsX[i]].tipo = type;
 				flag2 = PossiblePaths(vet, posAtualX + 2*possiblePathsX[i], posAtualY + 2*possiblePathsY[i], type, (i+2)%4);
