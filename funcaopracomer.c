@@ -28,7 +28,7 @@ void saveWay(PATH *auxWay, int auxSize, PATH **bankOfWays, int counterWays){
 int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i){
 
 	int temp = 0;
-
+	int i2 = i;
 	if (i == -1)
 		temp = 4;
 	else
@@ -36,6 +36,7 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 
 
 	i = (i+1)%4;
+	i2 = (i+1)%4;
 	int flag2 = 0;
 
 	BOARD vet[COL_MAX*LIN_MAX];
@@ -44,8 +45,8 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 				for (int coluna = 0; coluna < COL_MAX; coluna++)
 					 vet[POS].tipo = tabuleiro[POS].tipo;
 
-
-		for(int j = 0; j < temp; j++, i = (i+1)%4 ){
+	int j = 0;
+		for(j = 0; j < temp; j++, i = (i+1)%4 ){
 			if(checarSeCome(vet ,posAtualX, posAtualY, posAtualX+possiblePathsX[i], posAtualY+possiblePathsY[i], type)){
 				auxWaysToWin[waySize].posXfinal = posAtualX + 2*possiblePathsX[i];
 				auxWaysToWin[waySize].posYfinal = posAtualY + 2*possiblePathsY[i];
@@ -59,6 +60,17 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 				flag2 = PossiblePaths(vet, posAtualX + 2*possiblePathsX[i], posAtualY + 2*possiblePathsY[i], type, (i+2)%4);
 				vet[(posAtualY+possiblePathsY[i]) * COL_MAX + posAtualX+possiblePathsX[i]].tipo = aux;
 				waySize--;
+			}
+		
+		
+			if(j == temp-1 && validar(vet, posAtualX+possiblePathsX[i2], posAtualY+possiblePathsY[i2]) == 0 && temp == 3){
+
+						j = -1;
+						posAtualX += possiblePathsX[i2];
+						posAtualY += possiblePathsY[i2];
+						printf ("here   %d     %d\n", posAtualX+1, posAtualY+1);
+						i = i2;					
+
 			}
 		}
 

@@ -56,11 +56,11 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 					auxWaysToWin[waySize].posYfinal = posAtualY + (z+2)*possiblePathsY[i];
 					auxWaysToWin[waySize].posXcomida = posAtualX+((z+1)*possiblePathsX[i]);
 					auxWaysToWin[waySize].posYcomida = posAtualY+((z+1)*possiblePathsY[i]);
+					
 					waySize++;
-
 					aux = vet[(posAtualY+((z+1)*possiblePathsY[i])) * COL_MAX + posAtualX+((z+1)*possiblePathsX[i])].tipo;
 					vet[(posAtualY+possiblePathsY[i]) * COL_MAX + posAtualX+possiblePathsX[i]].tipo = type;
-					flag2 = PossiblePaths(vet, posAtualX + (z+2)*possiblePathsX[i], posAtualY + (z+2)*possiblePathsY[i], type, (i+2)%4);
+					PossiblePaths(vet, posAtualX + (z+2)*possiblePathsX[i], posAtualY + (z+2)*possiblePathsY[i], type, (i+2)%4);
 					vet[(posAtualY+((z+1)*possiblePathsY[i])) * COL_MAX + posAtualX+((z+1)*possiblePathsX[i])].tipo = aux;
 					waySize--;
 				}
@@ -74,20 +74,18 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 					j = -1;
 					posAtualX += possiblePathsX[i2];
 					posAtualY += possiblePathsY[i2];
-
+					i = i2;
 
 				}
 
 		}
 
-		if (!flag2){
+		
 		saveWay(auxWaysToWin, waySize, waysToWin, counterWays);
 		counterWays++;
 		
 		return 1;
-		}
-		else
-		return 0;	
+			
 }
 
 PATH **EncontrarCaminho (BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i){
