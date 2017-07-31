@@ -16,13 +16,13 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 		//posicionarpedras(tabuleiro);
 
 
-		int vet[COL_MAX*LIN_MAX] = {0, 0, 0, 0, 0, 0, 0, 0,
+		int vet[COL_MAX*LIN_MAX] =                             {0, 1, 0, 0, 0, 0, 0, 0,
 									0, 0, 0, 0, 0, 0, 0, 0,
-									0, 2, 0, 2, 0, 2, 0, 0,
-									0, 0, 0, 0, 0, 0, 0, 0,
-									0, 2, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 2, 0, 0, 0, 0,
 									0, 0, 0, 0, 0, 0, 2, 0,
-									0, 0, 0, 1, 0, 2, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 2, 0, 2, 0,
+									0, 2, 0, 0, 0, 0, 0, 0,
 									0, 0, 0, 0, 0, 0, 0, 0,
 									};
 

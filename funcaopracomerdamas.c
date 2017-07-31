@@ -29,12 +29,13 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 
 	int temp = 0;
 	int i2 = i;
+	int i3 = i;
 	if (i == -1)
 		temp = 4;
 	else
 		temp = 3;
 
-
+	//printf ("temp = %d\n", temp);
 	i = (i+1)%4;
 	i2 = (i+1)%4;
 	int flag2 = 0;
@@ -49,34 +50,55 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 		for(int j = 0; j < temp; j++, i = (i+1)%4 ){
 
 			int z = 0;
-			do{
-				if(checarSeCome(vet ,posAtualX+z*possiblePathsX[i], posAtualY+z*possiblePathsY[i], posAtualX+((z+1)*possiblePathsX[i]), posAtualY+((z+1)*possiblePathsY[i]), type)){
-				
-					auxWaysToWin[waySize].posXfinal = posAtualX + (z+2)*possiblePathsX[i];
-					auxWaysToWin[waySize].posYfinal = posAtualY + (z+2)*possiblePathsY[i];
-					auxWaysToWin[waySize].posXcomida = posAtualX+((z+1)*possiblePathsX[i]);
-					auxWaysToWin[waySize].posYcomida = posAtualY+((z+1)*possiblePathsY[i]);
-					
+			
+			if(checarSeCome(vet ,posAtualX, posAtualY, posAtualX+possiblePathsX[i], posAtualY+possiblePathsY[i], type) && temp == 3){
+					//printf ("ali\n");
+
+					auxWaysToWin[waySize].posXfinal = posAtualX + 2*possiblePathsX[i];
+					auxWaysToWin[waySize].posYfinal = posAtualY + 2*possiblePathsY[i];
+					auxWaysToWin[waySize].posXcomida = posAtualX+possiblePathsX[i];
+					auxWaysToWin[waySize].posYcomida = posAtualY+possiblePathsY[i];
 					waySize++;
-					aux = vet[(posAtualY+((z+1)*possiblePathsY[i])) * COL_MAX + posAtualX+((z+1)*possiblePathsX[i])].tipo;
+
+					//muda o tipo da pedra comida pra evitar ignorar as pedras comidas
+					aux = vet[(posAtualY + possiblePathsY[i]) * COL_MAX + posAtualX+possiblePathsX[i]].tipo;
 					vet[(posAtualY+possiblePathsY[i]) * COL_MAX + posAtualX+possiblePathsX[i]].tipo = type;
-					PossiblePaths(vet, posAtualX + (z+2)*possiblePathsX[i], posAtualY + (z+2)*possiblePathsY[i], type, (i+2)%4);
-					vet[(posAtualY+((z+1)*possiblePathsY[i])) * COL_MAX + posAtualX+((z+1)*possiblePathsX[i])].tipo = aux;
+					flag2 = PossiblePaths(vet, posAtualX + 2*possiblePathsX[i], posAtualY + 2*possiblePathsY[i], type, (i+2)%4);
+					vet[(posAtualY+possiblePathsY[i]) * COL_MAX + posAtualX+possiblePathsX[i]].tipo = aux;
 					waySize--;
-				}
-				z++;
 
 
-			}while(validar(vet, posAtualX+z*possiblePathsX[i], posAtualY+z*possiblePathsY[i]) == 0);
+			}else if (temp == 4){
+				//printf ("sfyysaguidasghdhasudhaush\n");
+				do{
+					if(checarSeCome(vet ,posAtualX+z*possiblePathsX[i], posAtualY+z*possiblePathsY[i], posAtualX+((z+1)*possiblePathsX[i]), posAtualY+((z+1)*possiblePathsY[i]), type) && temp != 3){
+				
+						auxWaysToWin[waySize].posXfinal = posAtualX + (z+2)*possiblePathsX[i];
+						auxWaysToWin[waySize].posYfinal = posAtualY + (z+2)*possiblePathsY[i];
+						auxWaysToWin[waySize].posXcomida = posAtualX+((z+1)*possiblePathsX[i]);
+						auxWaysToWin[waySize].posYcomida = posAtualY+((z+1)*possiblePathsY[i]);
+					
+						waySize++;
+						aux = vet[(posAtualY+((z+1)*possiblePathsY[i])) * COL_MAX + posAtualX+((z+1)*possiblePathsX[i])].tipo;
+						vet[(posAtualY+possiblePathsY[i]) * COL_MAX + posAtualX+possiblePathsX[i]].tipo = type;
+						PossiblePaths(vet, posAtualX + (z+2)*possiblePathsX[i], posAtualY + (z+2)*possiblePathsY[i], type, (i+2)%4);
+						vet[(posAtualY+((z+1)*possiblePathsY[i])) * COL_MAX + posAtualX+((z+1)*possiblePathsX[i])].tipo = aux;
+						waySize--;
+					}
+					z++;
+
+
+				}while(validar(vet, posAtualX+z*possiblePathsX[i], posAtualY+z*possiblePathsY[i]) == 0);
+			}
 
 				if(j == temp-1 && validar(vet, posAtualX+possiblePathsX[i2], posAtualY+possiblePathsY[i2]) == 0 && temp == 3){
-					printf ("here\n");					
+					//printf ("here\n");					
 					j = -1;
 					posAtualX += possiblePathsX[i2];
 					posAtualY += possiblePathsY[i2];
-					i = i2;
+					i = i3;
 
-				}
+			}
 
 		}
 

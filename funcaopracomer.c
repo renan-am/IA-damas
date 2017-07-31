@@ -63,7 +63,7 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 			}
 		
 		
-			if(j == temp-1 && validar(vet, posAtualX+possiblePathsX[i2], posAtualY+possiblePathsY[i2]) == 0 && temp == 3){
+	/*		if(j == temp-1 && validar(vet, posAtualX+possiblePathsX[i2], posAtualY+possiblePathsY[i2]) == 0 && temp == 3){
 
 						j = -1;
 						posAtualX += possiblePathsX[i2];
@@ -72,6 +72,7 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 						i = i2;					
 
 			}
+	*/
 		}
 
 		if (!flag2){
