@@ -46,8 +46,10 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 
 
 		for(int j = 0; j < temp; j++, i = (i+1)%4 ){
-			for(int z = 0; validar(vet, ); z++)
-				if(checarSeCome(vet ,posAtualX+z*possiblePathsX[i], posAtualY+z*possiblePathsY[i], posAtualX+((z+1)*possiblePathsX[i]), posAtualY+((z+1)*possiblePathsY[i]), type)){
+
+			int z = 0;
+			do{
+				if(checarSeCome(vet ,posAtualX+z*possiblePathsX[i], posAtualY+z*possiblePathsY[i], posAtualX+((z+1)*possiblePathsX[i]), posAtualY+((z+1)*possiblePathsY[i]), type)){				
 					auxWaysToWin[waySize].posXfinal = posAtualX + (z+2)*possiblePathsX[i];
 					auxWaysToWin[waySize].posYfinal = posAtualY + (z+2)*possiblePathsY[i];
 					auxWaysToWin[waySize].posXcomida = posAtualX+((z+1)*possiblePathsX[i]);
@@ -60,6 +62,8 @@ int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int
 					vet[(posAtualY+((z+1)*possiblePathsY[i])) * COL_MAX + posAtualX+((z+1)*possiblePathsX[i])].tipo = aux;
 					waySize--;
 				}
+				z++;
+			}while(validar(vet, posAtualX+z*possiblePathsX[i], posAtualY+z*possiblePathsY[i]) == 0);
 		}
 
 		if (!flag2){

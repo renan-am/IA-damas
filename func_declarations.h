@@ -2,7 +2,7 @@
 
 #include "game_functions.c"
 //#include "possiblePaths.c"
-#include "funcaopracomer.c"
+#include "funcaopracomerdamas.c"
 
 
 void posicionarpedras (BOARD *tab);    //inicializa o tabuleiro, com pedras tipo 1 na parte superior e tipo 2 na parte inferior
@@ -16,7 +16,7 @@ int checarSeCome (BOARD *tab, int c_origem, int l_origem, int c_alvo, int l_alvo
 
 void imprimir (BOARD *tab);    // imprime tabuleiro e legenda das linhas e colunas
 
-
+int validar (BOARD *tab, int coluna, int linha);
 
 
 int distancia (int l_origem, int tipo);   //retorna quantas linhas até a pedra virar damas (fim do tabuleiro)
