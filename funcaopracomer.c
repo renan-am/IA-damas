@@ -45,6 +45,9 @@ static int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int ty
 				for (int coluna = 0; coluna < COL_MAX; coluna++)
 					 vet[POS].tipo = tabuleiro[POS].tipo;
 
+	vet[posAtualY*COL_MAX+posAtualX].tipo = 0;
+	vet[posAtualY*COL_MAX+posAtualX].classe = 0;
+
 	int j = 0;
 		for(j = 0; j < temp; j++, i = (i+1)%4 ){
 			if(checarSeCome(vet ,posAtualX, posAtualY, posAtualX+possiblePathsX[i], posAtualY+possiblePathsY[i], type)){
@@ -95,6 +98,7 @@ PATH **EncontrarCaminho (BOARD *tabuleiro ,int posAtualX , int posAtualY, int ty
 
 		PossiblePaths (tabuleiro, posAtualX, posAtualY, type, i);
 
+
 		int maximo = 0;
      	int *indMAX =NULL;
 
@@ -104,6 +108,9 @@ PATH **EncontrarCaminho (BOARD *tabuleiro ,int posAtualX , int posAtualY, int ty
 				maximo = tamanho[i];
 			}
 		}
+
+		if (maximo == 0)
+			return NULL;
 
 		indMAX = calloc (100, sizeof(int));
 

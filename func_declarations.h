@@ -1,9 +1,8 @@
 #pragma once   //impede arquivo ser "included" varias vezes, evitando erro de multipla definição
 
-#include "game_functions.c"
+
 //#include "possiblePaths.c"
-#include "funcaopracomer.c"
-#include "funcaopracomerdamas.c"
+
 
 
 void posicionarpedras (BOARD *tab);    //inicializa o tabuleiro, com pedras tipo 1 na parte superior e tipo 2 na parte inferior
@@ -19,6 +18,7 @@ void imprimir (BOARD *tab);    // imprime tabuleiro e legenda das linhas e colun
 
 int validar (BOARD *tab, int coluna, int linha);
 
+void remover (BOARD *tab, PATH *pedrascomidas);
 
 int distancia (int l_origem, int tipo);   //retorna quantas linhas até a pedra virar damas (fim do tabuleiro)
 
@@ -29,3 +29,8 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 
 PATH **EncontrarCaminho (BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i);
 PATH **EncontrarCaminhoDama (BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i);
+
+
+#include "game_functions.c"
+#include "funcaopracomer.c"
+#include "funcaopracomerdamas.c"

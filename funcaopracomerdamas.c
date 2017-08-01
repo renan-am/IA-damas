@@ -46,6 +46,9 @@ static int PossiblePathsDama(BOARD *tabuleiro ,int posAtualX , int posAtualY, in
 				for (int coluna = 0; coluna < COL_MAX; coluna++)
 					 vet[POS].tipo = tabuleiro[POS].tipo;
 
+	vet[posAtualY*COL_MAX+posAtualX].tipo = 0;
+	vet[posAtualY*COL_MAX+posAtualX].classe = 0;
+
 
 		for(int j = 0; j < temp; j++, i = (i+1)%4 ){
 
@@ -129,6 +132,9 @@ PATH **EncontrarCaminhoDama (BOARD *tabuleiro ,int posAtualX , int posAtualY, in
 				maximo = tamanhoDama[i];
 			}
 		}
+
+			if (maximo == 0)
+			return NULL;
 
 		indMAX = calloc (100, sizeof(int));
 

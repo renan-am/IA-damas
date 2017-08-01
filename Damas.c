@@ -98,6 +98,12 @@ int main (){
 				printf ("erro\n");
 				continue;
 			}
+
+			if (!maiorcaminho){
+				printf ("Essa pedra nao come nada\n");
+				continue;
+			}
+
 			printf ("Escolha o caminho a ser serguido: \n");
 			
 			for (int i = 0; i < 100; i++){
