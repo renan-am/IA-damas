@@ -13,10 +13,10 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 
 	if (!jogoiniciou){
 		tabuleiro = calloc (COL_MAX*LIN_MAX, sizeof(BOARD));
-		//posicionarpedras(tabuleiro);
+		posicionarpedras(tabuleiro);
 
 
-		int vet[COL_MAX*LIN_MAX] =                             {0, 1, 0, 0, 0, 0, 0, 0,
+		/*int vet[COL_MAX*LIN_MAX] = {0, 1, 0, 0, 0, 0, 0, 0,
 									0, 0, 0, 0, 0, 0, 0, 0,
 									0, 0, 0, 2, 0, 0, 0, 0,
 									0, 0, 0, 0, 0, 0, 2, 0,
@@ -27,8 +27,9 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 									};
 
 		for (int linha = 0; linha < LIN_MAX; linha++)
-			for (int coluna = 0; coluna < COL_MAX; coluna++)
+			for (int coluna = 0; coluna < COL_MAX; coluna++){
 				tabuleiro[POS].tipo = vet[POS];
+			}*/
 
 
 		
@@ -54,6 +55,15 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 
 	if (pedrascomidas){
 		remover (tabuleiro, pedrascomidas);
+	}
+
+	for (int coluna = 0; coluna < COL_MAX; coluna++){
+		int linha = 0;
+		if (tabuleiro[POS].tipo == 2 && tabuleiro[POS].classe == 1)
+			tabuleiro[POS].classe = 2;
+		linha = 7;
+		if (tabuleiro[POS].tipo == 1 && tabuleiro[POS].classe == 1)
+			tabuleiro[POS].classe = 2;
 	}
 
 	system ("tput reset");
@@ -146,8 +156,14 @@ int main (){
 
 			PATH **maiorcaminho = NULL;
 
-			maiorcaminho = EncontrarCaminho (tab, c_origem, l_origem, tab[l_origem*COL_MAX+c_origem].tipo, -1);
-
+			if (tab[l_origem*COL_MAX+c_origem].classe == 1)
+				maiorcaminho = EncontrarCaminho (tab, c_origem, l_origem, tab[l_origem*COL_MAX+c_origem].tipo, -1);
+			else if (tab[l_origem*COL_MAX+c_origem].classe == 2)
+				maiorcaminho = EncontrarCaminhoDama (tab, c_origem, l_origem, tab[l_origem*COL_MAX+c_origem].tipo, -1);
+			else {
+				printf ("erro\n");
+				continue;
+			}
 			printf ("Escolha o caminho a ser serguido: \n");
 			
 			for (int i = 0; i < 100; i++){

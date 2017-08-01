@@ -13,11 +13,14 @@ void posicionarpedras (BOARD *tab){   //inicializa o tabuleiro, com pedras tipo 
 	for (linha = 0; linha < 3; linha++)
 		for (coluna = (linha+1)%2; coluna < COL_MAX; coluna += 2){	// (linha+1) % 2 garante que as casas serão alternadas, ex: 1ª linha as casas pretas começam na 2ª coluna, 2ª linha começam na 1ª coluna, etc.
 			tab[POS].tipo = 1;
+			tab[POS].classe = 1;
 		}
 
 	for (linha = 5; linha < LIN_MAX; linha++)
 		for (coluna = (linha+1)%2; coluna < COL_MAX; coluna += 2){	// (linha+1) % 2 garante que as casas serão alternadas, ex: 1ª linha as casas pretas começam na 2ª coluna, 2ª linha começam na 1ª coluna, etc.
 			tab[POS].tipo = 2;
+			tab[POS].classe = 1;
+
 		}
 	for (linha = 0; linha < LIN_MAX; linha++)
 			for (coluna = linha%2; coluna < COL_MAX; coluna += 2)
@@ -29,6 +32,10 @@ void mover (BOARD *tab, int c_origem, int l_origem, int c_destino, int l_destino
 	aux = tab[l_origem*COL_MAX+c_origem].tipo;
 	tab[l_origem*COL_MAX+c_origem].tipo = tab[l_destino*COL_MAX+c_destino].tipo;
 	tab[l_destino*COL_MAX+c_destino].tipo = aux;
+
+	aux = tab[l_origem*COL_MAX+c_origem].classe;
+	tab[l_origem*COL_MAX+c_origem].classe = tab[l_destino*COL_MAX+c_destino].classe;
+	tab[l_destino*COL_MAX+c_destino].classe = aux;
 }
 
 int validar (BOARD *tab, int coluna, int linha){
@@ -65,6 +72,7 @@ void remover (BOARD *tab, PATH *pedrascomidas){
 	int i = 0;
 	while (pedrascomidas[i].posXcomida != 0 && pedrascomidas[i].posYcomida != 0){
 		tab[pedrascomidas[i].posYcomida * COL_MAX + pedrascomidas[i].posXcomida].tipo = 0;
+		tab[pedrascomidas[i].posYcomida * COL_MAX + pedrascomidas[i].posXcomida].classe = 0;
 		i++;
 	}
 }
@@ -88,8 +96,10 @@ void imprimir (BOARD *tab){ // imprime tabuleiro e legenda das linhas e colunas
 			}
 
 
-			if (tab[POS].tipo > 0){     //imprime as pedras e substitui 0 por espaços em branco
+			if (tab[POS].tipo > 0 && tab[POS].classe == 1){     //imprime as pedras e substitui 0 por espaços em branco
 				printf ("%.1d ", tab[POS].tipo);
+			} else if (tab[POS].tipo > 0 && tab[POS].classe == 2) {
+				printf ("%d*", tab[POS].tipo);
 			} else {
 				printf("  ");
 			}

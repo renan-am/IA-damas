@@ -6,7 +6,7 @@
 
 
 static PATH *auxWaysToWin; // vetor auxiliar com o caminho atual.
-PATH **waysToWin;//matriz que vai guardar os caminhos possiveis.
+static PATH **waysToWin;//matriz que vai guardar os caminhos possiveis.
 
 static int *tamanho;
 
@@ -16,7 +16,7 @@ static int waySize = 0, counterWays = 0;// deve estar na main e ser zerada antes
 
 
 
-void saveWay(PATH *auxWay, int auxSize, PATH **bankOfWays, int counterWays){
+static void saveWay(PATH *auxWay, int auxSize, PATH **bankOfWays, int counterWays){
 
 	for(int i = 0; i < auxSize; i++){
 		bankOfWays[counterWays][i] = auxWaysToWin[i];
@@ -25,7 +25,7 @@ void saveWay(PATH *auxWay, int auxSize, PATH **bankOfWays, int counterWays){
 	
 }
 
-int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i){
+static int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i){
 
 	int temp = 0;
 	int i2 = i;

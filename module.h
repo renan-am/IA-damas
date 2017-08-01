@@ -26,7 +26,6 @@ extern int turno;
 
 
 
-extern PATH **waysToWin;
 
 
 

@@ -2,6 +2,7 @@
 
 #include "game_functions.c"
 //#include "possiblePaths.c"
+#include "funcaopracomer.c"
 #include "funcaopracomerdamas.c"
 
 
@@ -23,6 +24,6 @@ int distancia (int l_origem, int tipo);   //retorna quantas linhas até a pedra 
 
 
 
-int PossiblePaths(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i);
 
-void saveWay(PATH *auxWay, int auxSize, PATH **bankOfWays, int counterWays);
+PATH **EncontrarCaminho (BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i);
+PATH **EncontrarCaminhoDama (BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i);
