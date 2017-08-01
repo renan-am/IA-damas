@@ -2,6 +2,8 @@
 #define LIN_MAX 8
 #define POS linha*COL_MAX+coluna
 
+
+
 typedef struct {
 
 	int posXfinal;

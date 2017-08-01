@@ -22,6 +22,8 @@ int validar (BOARD *tab, int coluna, int linha);
 
 int distancia (int l_origem, int tipo);   //retorna quantas linhas até a pedra virar damas (fim do tabuleiro)
 
+BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *pedrascomidas);
+
 
 
 
