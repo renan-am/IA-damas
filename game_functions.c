@@ -9,9 +9,9 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 
 	if (!jogoiniciou){
 		tabuleiro = calloc (COL_MAX*LIN_MAX, sizeof(BOARD));
-		//posicionarpedras(tabuleiro);
+		posicionarpedras(tabuleiro);
 
-
+/*
 		int vet[COL_MAX*LIN_MAX] =     {0, 1, 0, 1, 0, 1, 0, 1,
 						0, 0, 0, 0, 1, 0, 1, 0,
 						0, 0, 0, 1, 0, 0, 0, 1,
@@ -30,7 +30,7 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 				else
 				tabuleiro[POS].classe = vet[POS];
 			}
-
+*/
 
 		
 
