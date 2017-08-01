@@ -132,8 +132,47 @@ int main (){
 				}
 			}
 			
-			tab = GAME (c_origem, l_origem, maiorcaminho[track][i].posXfinal, maiorcaminho[track][i].posYfinal, maiorcaminho[track]);
-			free (maiorcaminho);
+			if (tab[l_origem*COL_MAX+c_origem].classe == 1){
+				tab = GAME (c_origem, l_origem, maiorcaminho[track][i].posXfinal, maiorcaminho[track][i].posYfinal, maiorcaminho[track]);
+				free (maiorcaminho);
+			}
+			else if (tab[l_origem*COL_MAX+c_origem].classe == 2){
+				while(1){
+					while (1){
+					printf ("Digite a coluna de destino: ");
+					scanf ("%d", &c_destino);
+					c_destino--;
+					if (c_destino >= COL_MAX || c_destino < 0)
+						printf ("Coluna invalida, tente novamente\n");
+					else
+						break;
+				}
+
+				while (1){
+					printf ("Digite a linha de destino: ");
+					scanf ("%d", &l_destino);
+					l_destino--;
+					if (l_destino >= COL_MAX || l_destino < 0)
+						printf ("Coluna invalida, tente novamente\n");
+					else
+						break;
+				}
+
+				if (tab[l_destino*COL_MAX+c_destino].tipo != 0)  // A coordenada indicada esta ocupada, a pedra nao podera ser movida para ca
+					printf ("Ja tem uma pedra en Coluna: %d, Linha: %d\nDigite uma posicao valida\n", c_origem+1, l_origem+1);
+				else if ((l_destino+1)*(c_destino+1) % 2 != 0)
+					printf ("Local de destino invalido. Digite uma posicao valida\n");
+				else
+					break;
+				}
+				tab = GAME (c_origem, l_origem, c_destino, l_destino, maiorcaminho[track]);
+				free (maiorcaminho);
+			}
+
+			
+			
+
+			
 
 
 		}

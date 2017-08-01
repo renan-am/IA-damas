@@ -40,7 +40,7 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 	}
 
 
-	if (c_origem == l_origem && l_origem == c_destino && c_destino == l_destino){
+	if (c_origem == l_origem && l_origem == c_destino && c_destino == l_destino && c_origem == 0){
 		return tabuleiro;
 	}
 
