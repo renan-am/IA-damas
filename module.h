@@ -25,9 +25,3 @@ typedef struct {
 
 extern int game;
 extern int turno;
-
-
-
-
-
-

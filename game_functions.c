@@ -163,7 +163,7 @@ void imprimir (BOARD *tab){ // imprime tabuleiro e legenda das linhas e colunas
 
 		for (coluna = 0; coluna < COL_MAX; coluna++){
 			if (linha == LIN_MAX+1){           // imprime legenda da coluna e ignora o resto do loop
-				printf ("%.2d ", coluna+1);
+				printf (" %c ", (64)+(coluna+1));
 				continue;
 			}
 
@@ -179,7 +179,7 @@ void imprimir (BOARD *tab){ // imprime tabuleiro e legenda das linhas e colunas
 		if (linha == LIN_MAX+1)
 			printf ("\n");
 		else
-			printf("  %.2d\n", linha+1);
+			printf("  %d\n", linha+1);
 
 	}
 }
@@ -194,7 +194,7 @@ int checarAcao (BOARD *tab, int coluna, int linha){ //retorna 0 se não houver n
 
 		for (int i = -1; linha < 2; linha += 2){
 			for (int j = -1; coluna < 2; coluna += 2){
-				if (checarSeCome(tab, coluna, linha, coluna+i, linha+j) == 1) //checar se pode capturar alguma coisa
+				if (checarSeCome(tab, coluna, linha, coluna+i, linha+j, 0) == 1) //checar se pode capturar alguma coisa
 					flagcomeu = 1;
 				else if (tab[POS].tipo > 0  &&  tab[(linha+i)*COL_MAX + (coluna+j)].tipo == 0)
 					flagmoveu = 1;

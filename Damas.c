@@ -105,7 +105,7 @@ int main (){
 			}
 
 			printf ("Escolha o caminho a ser serguido: \n");
-			
+
 			for (int i = 0; i < 100; i++){
 				if (maiorcaminho[i][0].posXcomida == 0 && maiorcaminho[i][0].posYcomida == 0){
 					//printf ("morreu aqui 2\n");
@@ -126,12 +126,12 @@ int main (){
 			scanf ("%d", &track);
 			track--;
 			for (i = 0; i< 100; i++){
-				if (maiorcaminho[track][i].posXcomida == 0 && maiorcaminho[track][i].posYcomida == 0){	
+				if (maiorcaminho[track][i].posXcomida == 0 && maiorcaminho[track][i].posYcomida == 0){
 					i--;
 					break;
 				}
 			}
-			
+
 			if (tab[l_origem*COL_MAX+c_origem].classe == 1){
 				tab = GAME (c_origem, l_origem, maiorcaminho[track][i].posXfinal, maiorcaminho[track][i].posYfinal, maiorcaminho[track]);
 				free (maiorcaminho);
@@ -169,10 +169,10 @@ int main (){
 				free (maiorcaminho);
 			}
 
-			
-			
 
-			
+
+
+
 
 
 		}
@@ -183,7 +183,7 @@ int main (){
 			getchar ();
 		}
 
-		
+
 
 
 	}
