@@ -11,30 +11,30 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 		tabuleiro = calloc (COL_MAX*LIN_MAX, sizeof(BOARD));
 		posicionarpedras(tabuleiro);
 
-/*
-		int vet[COL_MAX*LIN_MAX] =     {0, 1, 0, 1, 0, 1, 0, 1,
-						0, 0, 0, 0, 1, 0, 1, 0,
-						0, 0, 0, 1, 0, 0, 0, 1,
-						1, 0, 0, 0, 0, 0, 0, 0,
-						0, 0, 0, 0, 0, 2, 0, 1,
-						2, 0, 2, 0, 2, 0, 2, 0,
-						0, 2, 0, 0, 0, 0, 0, 0,
-						2, 0, 1, 0, 2, 0, 2, 0,
-						};
+	/*
+			int vet[COL_MAX*LIN_MAX] =     {0, 1, 0, 1, 0, 1, 0, 1,
+							0, 0, 0, 0, 1, 0, 1, 0,
+							0, 0, 0, 1, 0, 0, 0, 1,
+							1, 0, 0, 0, 0, 0, 0, 0,
+							0, 0, 0, 0, 0, 2, 0, 1,
+							2, 0, 2, 0, 2, 0, 2, 0,
+							0, 2, 0, 0, 0, 0, 0, 0,
+							2, 0, 1, 0, 2, 0, 2, 0,
+							};
 
-		for (int linha = 0; linha < LIN_MAX; linha++)
-			for (int coluna = 0; coluna < COL_MAX; coluna++){
-				tabuleiro[POS].tipo = vet[POS];
-				if (vet[POS] == 2)
-				tabuleiro[POS].classe = 1;
-				else
-				tabuleiro[POS].classe = vet[POS];
-			}
-*/
+			for (int linha = 0; linha < LIN_MAX; linha++)
+				for (int coluna = 0; coluna < COL_MAX; coluna++){
+					tabuleiro[POS].tipo = vet[POS];
+					if (vet[POS] == 2)
+					tabuleiro[POS].classe = 1;
+					else
+					tabuleiro[POS].classe = vet[POS];
+				}
+	*/
 
-		
 
-		
+
+
 
 		jogoiniciou = 1;
 		system ("tput reset");
@@ -110,7 +110,7 @@ void mover (BOARD *tab, int c_origem, int l_origem, int c_destino, int l_destino
 	tab[l_destino*COL_MAX+c_destino].classe = aux;
 }
 
-int validar (BOARD *tab, int coluna, int linha){
+int validar (BOARD *tab, int coluna, int linha){ // retorna < 0 para posições impossíveis, ou retorna tipo
 	if (coluna < 0 || coluna >= COL_MAX || linha < 0 || linha >= LIN_MAX)
 		return -2;
 	else
@@ -122,8 +122,8 @@ int checarSeCome (BOARD *tab, int c_origem, int l_origem, int c_alvo, int l_alvo
 		tipo = tab[l_origem*COL_MAX+c_origem].tipo;
 
 	int c_final = 0, l_final = 0;
-	c_final = 2 * c_alvo - c_origem; 
-	l_final = 2 * l_alvo - l_origem; 
+	c_final = 2 * c_alvo - c_origem;
+	l_final = 2 * l_alvo - l_origem;
 
 	if (c_final < 0 || l_final < 0)
 		return 0;
@@ -152,9 +152,9 @@ void remover (BOARD *tab, PATH *pedrascomidas){
 
 void imprimir (BOARD *tab){ // imprime tabuleiro e legenda das linhas e colunas
 	int linha, coluna;
-	
+
 	for (linha = 0; linha < LIN_MAX+2; linha++){
-		
+
 		if (linha == LIN_MAX){  // pula uma linha para separar a legenda das colunas
 				printf("\n");
 				continue;
@@ -181,5 +181,32 @@ void imprimir (BOARD *tab){ // imprime tabuleiro e legenda das linhas e colunas
 		else
 			printf("  %.2d\n", linha+1);
 
-	}  
+	}
+}
+
+
+int checarAcao (BOARD *tab, int coluna, int linha){ //retorna 0 se não houver nenhuma ação possivel, retorna 1 se puder se movimentar, retorna 2 se puder capturar
+
+	//teste
+
+	int flagcomeu = 0;
+	int flagmoveu = 0;
+
+		for (int i = -1; linha < 2; linha += 2){
+			for (int j = -1; coluna < 2; coluna += 2){
+				if (checarSeCome(tab, coluna, linha, coluna+i, linha+j) == 1) //checar se pode capturar alguma coisa
+					flagcomeu = 1;
+				else if (tab[POS].tipo > 0  &&  tab[(linha+i)*COL_MAX + (coluna+j)].tipo == 0)
+					flagmoveu = 1;
+			}
+		}
+
+	if (flagcomeu)
+		return 2;
+	else if (flagmoveu)
+		return 1;
+	else
+		return 0;
+
+
 }
