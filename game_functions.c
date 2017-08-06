@@ -211,24 +211,26 @@ int checarAcao (BOARD *tab, int coluna, int linha, PIECES *usefulPieces, DYNAMIC
 
 char checarJogada (BOARD *tab, int jogador, PIECES *usefulPieces, DYNAMICVEC *usefulPiecesParameters){
 	int jogada = 0, aux = 0;
+	int flagmoveu = 0, flagcomeu = 0;
 
 	for (int linha = 0; linha < LIN_MAX; linha++){
 		for (int coluna = 0; coluna < COL_MAX; coluna++){
 			if (tab[POS].tipo == jogador){
 				aux = checarAcao (tab, coluna, linha, usefulPieces, usefulPiecesParameters);
 				if (aux == 2)
-					return 'c';
+					flagcomeu = 1;
 				else if (aux == 1)
-					jogada = 1;
+					flagmoveu = 1;
 			}
 		}
 	}
 
-	if (jogada == 1)
+	if (flagcomeu)
+		return 'c';
+	if (flagmoveu)
 		return 'm';
-	else{
+	else
 		return 'x';
-	}
 
 }
 
