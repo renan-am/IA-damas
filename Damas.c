@@ -18,8 +18,20 @@ int main (){
 
 	while (game == 1){
 
-		printf ("Mover ou Capturar? (M/C): ");
-		scanf (" %c", &acao);
+		printf ("Turno do Jogador: %d\n", turno);
+		//printf ("Mover ou Capturar? (M/C): ");
+		//scanf (" %c", &acao);
+		acao = checarJogada (tab, turno);
+
+		if (acao == 'm')
+			printf ("Por favor escolha pedra a ser movida\n");
+		else if (acao == 'c')
+			printf ("Por favor escolha pedra que ira realizar a captura\n");
+		else{
+			printf ("Jogador %d, nao possui jogadas validas\n", turno);
+			turno = (turno%2)+1;
+			continue;
+		}
 
 		if (acao == 'M' || acao == 'm'){
 			while (1){	// pede as coordenadas de ORIGEM da pedra a ser movida, em seguida checa se estao no intervalo correto e se essa coordenada representa o local de uma pedra

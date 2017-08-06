@@ -187,16 +187,14 @@ void imprimir (BOARD *tab){ // imprime tabuleiro e legenda das linhas e colunas
 
 int checarAcao (BOARD *tab, int coluna, int linha){ //retorna 0 se não houver nenhuma ação possivel, retorna 1 se puder se movimentar, retorna 2 se puder capturar
 
-	//teste
-
 	int flagcomeu = 0;
 	int flagmoveu = 0;
 
-		for (int i = -1; linha < 2; linha += 2){
-			for (int j = -1; coluna < 2; coluna += 2){
+		for (int i = -1; i < 2; i += 2){
+			for (int j = -1; j < 2; j += 2){
 				if (checarSeCome(tab, coluna, linha, coluna+i, linha+j, 0) == 1) //checar se pode capturar alguma coisa
 					flagcomeu = 1;
-				else if (tab[POS].tipo > 0  &&  tab[(linha+i)*COL_MAX + (coluna+j)].tipo == 0)
+				else if (validar (tab, coluna+i, linha+j) == 0 && tab[POS].tipo > 0)
 					flagmoveu = 1;
 			}
 		}
@@ -207,6 +205,28 @@ int checarAcao (BOARD *tab, int coluna, int linha){ //retorna 0 se não houver n
 		return 1;
 	else
 		return 0;
+}
 
+char checarJogada (BOARD *tab, int jogador){
+	int jogada = 0, aux = 0;	
+
+	for (int linha = 0; linha < LIN_MAX; linha++){
+		for (int coluna = 0; coluna < COL_MAX; coluna++){
+			if (tab[POS].tipo == jogador){
+				aux = checarAcao (tab, coluna, linha);
+				if (aux == 2)
+					return 'c';
+				else if (aux == 1)
+					jogada = 1;
+			}
+		}
+	}
+
+	if (jogada == 1)
+		return 'm';
+	else{
+		printf ("aqui\n");
+		return 'x';
+	}
 
 }

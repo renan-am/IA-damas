@@ -22,6 +22,10 @@ void remover (BOARD *tab, PATH *pedrascomidas);
 
 int distancia (int l_origem, int tipo);   //retorna quantas linhas até a pedra virar damas (fim do tabuleiro)
 
+int checarAcao (BOARD *tab, int coluna, int linha);
+
+char checarJogada (BOARD *tab, int jogador);
+
 BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *pedrascomidas);
 
 
