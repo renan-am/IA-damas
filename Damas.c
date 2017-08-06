@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "module.h"
 #include "func_declarations.h"
@@ -12,6 +13,7 @@ int main (){
 	int c_origem = 0, l_origem = 0, c_destino = 0, l_destino = 0;
 	int track = 0; //caminho escolhido pelo jogador para comer as pedras
 	char acao;
+	char input[10] = "0";
 	BOARD *tab = NULL;
 
 	tab = GAME (0,0,0,0,NULL);
@@ -34,10 +36,12 @@ int main (){
 		}
 
 		if (acao == 'M' || acao == 'm'){
-			while (1){	// pede as coordenadas de ORIGEM da pedra a ser movida, em seguida checa se estao no intervalo correto e se essa coordenada representa o local de uma pedra
+/*			while (1){	// pede as coordenadas de ORIGEM da pedra a ser movida, em seguida checa se estao no intervalo correto e se essa coordenada representa o local de uma pedra
 					while (1){
 						printf ("Digite a coluna da pedra a ser movida: ");
-						scanf ("%d", &c_origem);
+						scanf (" %d", &c_origem);
+					    getchar();
+						
 						c_origem--;
 						if (c_origem >= COL_MAX || c_origem < 0)
 							printf ("Coluna invalida, tente novamente\n");
@@ -47,7 +51,9 @@ int main (){
 
 					while (1){
 						printf ("Digite a linha da pedra a ser movida: ");
-						scanf ("%d", &l_origem);
+						scanf (" %d", &l_origem);
+						getchar();
+						
 						l_origem--;
 						if (l_origem >= COL_MAX || l_origem < 0)
 							printf ("Linha invalida, tente novamente\n");
@@ -63,7 +69,8 @@ int main (){
 			while (1){	// pede as coordenadas de DESTINO da pedra a ser movida, em seguida checa se ja existe uma pedra nesse local
 				while ( 1){
 					printf ("Digite a coluna de destino: ");
-					scanf ("%d", &c_destino);
+					scanf (" %d", &c_destino);
+					getchar();
 					c_destino--;
 					if (c_destino >= COL_MAX || c_destino < 0)
 						printf ("Coluna invalida, tente novamente\n");
@@ -73,7 +80,8 @@ int main (){
 
 				while (1){
 					printf ("Digite a linha de destino: ");
-					scanf ("%d", &l_destino);
+					scanf (" %d", &l_destino);
+					getchar();
 					l_destino--;
 					if (l_destino >= COL_MAX || l_destino < 0)
 						printf ("Coluna invalida, tente novamente\n");
@@ -87,18 +95,49 @@ int main (){
 					printf ("Local de destino invalido. Digite uma posicao valida\n");
 				else
 					break;
-			} //Loop de movimento
+			} //Loop de movimento*/
+
+			while (1){
+				printf ("ex ('A6 C4' move pedra de A6 para C4): ");
+				fgets (input, 10, stdin);
+				c_origem = input[0] - 'A';
+				l_origem = input[1] - '1';
+
+				c_destino = input[3] - 'A';
+				l_destino = input[4] - '1';
+
+				if (validar(tab, c_origem, l_origem) == turno  && validar(tab, c_destino, l_destino) == 0)
+					break;
+				else{
+					printf ("entrada invalida\n");
+				}
+			}
+
+
 
 			tab = GAME (c_origem, l_origem, c_destino, l_destino, NULL);
 		}
 
 		else if (acao == 'C' || acao == 'c'){ //loop de captura
-			printf ("digite x origem: ");
+			/*printf ("digite x origem: ");
 			scanf ("%d", &c_origem);
 			c_origem--;
 			printf ("digite y origem: ");
 			scanf ("%d", &l_origem);
-			l_origem--;
+			l_origem--;*/
+
+			while (1){
+				printf ("ex ('A6' ou 'C3'): ");
+				fgets (input, 10, stdin);
+				c_origem = input[0] - 'A';
+				l_origem = input[1] - '1';
+
+				if (validar(tab, c_origem, l_origem))
+					break;
+				else{
+					printf ("entrada invalida\n");
+				}
+			}
 
 			PATH **maiorcaminho = NULL;
 
@@ -123,7 +162,7 @@ int main (){
 					//printf ("morreu aqui 2\n");
 						break;
 					}
-				printf ("caminho %d\n", i+1);
+				printf ("caminho %d:  ", i+1);
 				for (int j = 0; j<20; j++){
 					if (maiorcaminho[i][j].posXcomida == 0 && maiorcaminho[i][j].posYcomida == 0){
 						//printf ("morreu aqui 3\n");
@@ -135,7 +174,8 @@ int main (){
 				printf ("\n"); // imprime os caminhos
 			}
 
-			scanf ("%d", &track);
+			scanf (" %d", &track);
+			getchar();
 			track--;
 			for (i = 0; i< 100; i++){
 				if (maiorcaminho[track][i].posXcomida == 0 && maiorcaminho[track][i].posYcomida == 0){
@@ -162,7 +202,8 @@ int main (){
 
 				while (1){
 					printf ("Digite a linha de destino: ");
-					scanf ("%d", &l_destino);
+					scanf (" %d", &l_destino);
+					getchar();
 					l_destino--;
 					if (l_destino >= COL_MAX || l_destino < 0)
 						printf ("Coluna invalida, tente novamente\n");
