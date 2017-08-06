@@ -235,8 +235,9 @@ char checarJogada (BOARD *tab, int jogador, PIECES *usefulPieces, DYNAMICVEC *us
 }
 
 void usefulPiecesFunction (int line, int column, PIECES* usefulPieces, DYNAMICVEC *usefulPiecesParameters){
+	PIECES *aux = NULL;
+
 	if(usefulPieces == NULL){
-		printf("here\n");
 		usefulPiecesParameters->capacity = 2;
 		usefulPiecesParameters->size = 1;
 		usefulPieces = malloc(2*sizeof(PIECES));
@@ -246,7 +247,9 @@ void usefulPiecesFunction (int line, int column, PIECES* usefulPieces, DYNAMICVE
 		usefulPiecesParameters->size++;
 			if(usefulPiecesParameters->size == usefulPiecesParameters->capacity){
 				(usefulPiecesParameters->capacity) *= 2;
-				usefulPieces = realloc(usefulPieces, (usefulPiecesParameters->capacity) * sizeof(PIECES));
+				aux = realloc(usefulPieces, (usefulPiecesParameters->capacity) * sizeof(PIECES));
+				free(usefulPieces);
+				usefulPieces = aux;
 			}
 			usefulPieces[usefulPiecesParameters->size -1].line = line;
 			usefulPieces[usefulPiecesParameters->size -1].column = column;
