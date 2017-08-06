@@ -2,7 +2,17 @@
 #define LIN_MAX 8
 #define POS linha*COL_MAX+coluna
 
+typedef struct{
+	int capacity;
+	int size;
 
+} DYNAMICVEC;
+
+typedef struct{
+	int line;
+	int column;
+
+} PIECES;
 
 typedef struct {
 

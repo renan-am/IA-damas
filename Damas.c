@@ -24,7 +24,12 @@ int main (){
 		printf ("Turno do Jogador: %d\n", turno);
 		//printf ("Mover ou Capturar? (M/C): ");
 		//scanf (" %c", &acao);
-		acao = checarJogada (tab, turno);
+		PIECES *usefulPieces = NULL;
+		DYNAMICVEC usefulPiecesParameters;
+		usefulPiecesParameters.capacity = 0;
+		usefulPiecesParameters.size = 0;
+
+		acao = checarJogada (tab, turno, usefulPieces, &usefulPiecesParameters);
 
 		if (acao == 'm')
 			printf ("Por favor escolha pedra a ser movida\n");
@@ -37,13 +42,13 @@ int main (){
 		}
 
 		if (acao == 'M' || acao == 'm'){
-				
+
 			/*	while (1){	// pede as coordenadas de ORIGEM da pedra a ser movida, em seguida checa se estao no intervalo correto e se essa coordenada representa o local de uma pedra
 							while (1){
 								printf ("Digite a coluna da pedra a ser movida: ");
 								scanf (" %d", &c_origem);
 							    getchar();
-								
+
 								c_origem--;
 								if (c_origem >= COL_MAX || c_origem < 0)
 									printf ("Coluna invalida, tente novamente\n");
@@ -55,7 +60,7 @@ int main (){
 								printf ("Digite a linha da pedra a ser movida: ");
 								scanf (" %d", &l_origem);
 								getchar();
-								
+
 								l_origem--;
 								if (l_origem >= COL_MAX || l_origem < 0)
 									printf ("Linha invalida, tente novamente\n");
@@ -133,11 +138,36 @@ int main (){
 			l_origem--;*/
 
 			while (1){
-				printf ("ex ('A6' ou 'C3'): ");
-				fgets (input, 10, stdin);
-				input[0] = tolower(input[0]);
-				c_origem = input[0] - 'a';
-				l_origem = input[1] - '1';
+				printf("Existe(m) peça(s) que são obrigada(s) a realizar a ação de comer:\n");
+				printf("%d %d\n\n",usefulPieces[usefulPiecesParameters.size].line, usefulPieces[usefulPiecesParameters.size].column);
+				if(usefulPiecesParameters.size == 1){
+					printf("Opcao unica: (%c%c)\n", usefulPieces[usefulPiecesParameters.size - 1].line + 'a', usefulPieces[usefulPiecesParameters.size - 1].column + '1');
+					printf("Aperte enter para continuar\n");
+					getchar();
+					c_origem = usefulPieces[usefulPiecesParameters.size - 1].line;
+					l_origem =	usefulPieces[usefulPiecesParameters.size - 1].column;
+
+					free(usefulPieces);
+					usefulPiecesParameters.capacity = 0;
+					usefulPiecesParameters.size = 0;
+				}else{
+
+					int choice;
+					printf("Escolha a opcao correspondente à peça que deseja usar para comer:\n");
+					for(int i = 0; i < usefulPiecesParameters.size; i++){
+						printf("%d - %c%c\n",i+1 , usefulPieces[i].line + 'a' , usefulPieces[i].column + '1');
+					}
+					printf("Digite:\n");
+					scanf("%d", &choice);
+					choice--;
+					if(choice < usefulPiecesParameters.size){
+						c_origem = usefulPieces[choice].line;
+						l_origem =	usefulPieces[choice].column;
+					}else{
+						printf("opcao invalida\n");
+						continue;
+					}
+				}
 
 				if (validar(tab, c_origem, l_origem) == turno)
 					break;
@@ -228,9 +258,7 @@ int main (){
 				tab = GAME (c_origem, l_origem, c_destino, l_destino, maiorcaminho[track]);
 				free (maiorcaminho);
 			}
-		}
-
-		else {
+		}else{
 			printf ("entrada invalida\n");
 			getchar ();
 			getchar ();

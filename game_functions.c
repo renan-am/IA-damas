@@ -185,15 +185,17 @@ void imprimir (BOARD *tab){ // imprime tabuleiro e legenda das linhas e colunas
 }
 
 
-int checarAcao (BOARD *tab, int coluna, int linha){ //retorna 0 se não houver nenhuma ação possivel, retorna 1 se puder se movimentar, retorna 2 se puder capturar
+int checarAcao (BOARD *tab, int coluna, int linha, PIECES *usefulPieces, DYNAMICVEC *usefulPiecesParameters){ //retorna 0 se não houver nenhuma ação possivel, retorna 1 se puder se movimentar, retorna 2 se puder capturar
 
 	int flagcomeu = 0;
 	int flagmoveu = 0;
 
 		for (int i = -1; i < 2; i += 2){
 			for (int j = -1; j < 2; j += 2){
-				if (checarSeCome(tab, coluna, linha, coluna+i, linha+j, 0) == 1) //checar se pode capturar alguma coisa
+				if (checarSeCome(tab, coluna, linha, coluna+i, linha+j, 0) == 1){ //checar se pode capturar alguma coisa
 					flagcomeu = 1;
+					usefulPiecesFunction(coluna, linha, usefulPieces, usefulPiecesParameters);
+				}
 				else if (validar (tab, coluna+i, linha+j) == 0 && tab[POS].tipo > 0)
 					flagmoveu = 1;
 			}
@@ -207,13 +209,13 @@ int checarAcao (BOARD *tab, int coluna, int linha){ //retorna 0 se não houver n
 		return 0;
 }
 
-char checarJogada (BOARD *tab, int jogador){
-	int jogada = 0, aux = 0;	
+char checarJogada (BOARD *tab, int jogador, PIECES *usefulPieces, DYNAMICVEC *usefulPiecesParameters){
+	int jogada = 0, aux = 0;
 
 	for (int linha = 0; linha < LIN_MAX; linha++){
 		for (int coluna = 0; coluna < COL_MAX; coluna++){
 			if (tab[POS].tipo == jogador){
-				aux = checarAcao (tab, coluna, linha);
+				aux = checarAcao (tab, coluna, linha, usefulPieces, usefulPiecesParameters);
 				if (aux == 2)
 					return 'c';
 				else if (aux == 1)
@@ -225,8 +227,27 @@ char checarJogada (BOARD *tab, int jogador){
 	if (jogada == 1)
 		return 'm';
 	else{
-		printf ("aqui\n");
 		return 'x';
+	}
+
+}
+
+void usefulPiecesFunction (int line, int column, PIECES* usefulPieces, DYNAMICVEC *usefulPiecesParameters){
+	if(usefulPieces == NULL){
+		printf("here\n");
+		usefulPiecesParameters->capacity = 2;
+		usefulPiecesParameters->size = 1;
+		usefulPieces = malloc(2*sizeof(PIECES));
+		usefulPieces[0].line = line;
+		usefulPieces[0].column = column;
+	}else{
+		usefulPiecesParameters->size++;
+			if(usefulPiecesParameters->size == usefulPiecesParameters->capacity){
+				(usefulPiecesParameters->capacity) *= 2;
+				usefulPieces = realloc(usefulPieces, (usefulPiecesParameters->capacity) * sizeof(PIECES));
+			}
+			usefulPieces[usefulPiecesParameters->size -1].line = line;
+			usefulPieces[usefulPiecesParameters->size -1].column = column;
 	}
 
 }
