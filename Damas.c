@@ -141,11 +141,11 @@ int main (){
 				printf("Existe(m) peça(s) que são obrigada(s) a realizar a ação de comer:\n");
 				//printf("%d %d\n\n",usefulPieces[usefulPiecesParameters.size - 1].column, usefulPieces[usefulPiecesParameters.size - 1].line);
 				if(usefulPiecesParameters.size == 1){
-					printf("Opcao unica: (%c%c)\n", usefulPieces[usefulPiecesParameters.size - 1].column + 'a', usefulPieces[usefulPiecesParameters.size - 1].line + '1');
+					printf("Opcao unica: (%c%c)\n", usefulPieces[usefulPiecesParameters.size - 1].column + 'a' + 1, usefulPieces[usefulPiecesParameters.size - 1].line + '1'+ 1);
 					printf("Aperte enter para continuar\n");
 					getchar();
-					c_origem = usefulPieces[usefulPiecesParameters.size - 1].line;
-					l_origem =	usefulPieces[usefulPiecesParameters.size - 1].column;
+					c_origem = usefulPieces[usefulPiecesParameters.size].column;
+					l_origem = usefulPieces[usefulPiecesParameters.size].line;
 
 					free(usefulPieces);
 					usefulPiecesParameters.capacity = 0;
@@ -155,15 +155,16 @@ int main (){
 					int choice = 0;
 					printf("Escolha a opcao correspondente à peça que deseja usar para comer:\n");
 					for(int i = 0; i < usefulPiecesParameters.size; i++){
-						printf("%d - %c%c\n",i+1 , usefulPieces[i].line + 'a' , usefulPieces[i].column + '1');
+						//printf("%d - %c%c\n",i+1 , usefulPieces[i].line + 'a' + 1, usefulPieces[i].column + '1' + 1);
+						printf("%d - %d%d\n",i+1 , usefulPieces[i].line, usefulPieces[i].column);
 					}
 					printf("Digite:\n");
 					scanf(" %d", &choice);
 					getchar();
 					choice--;
 					if(choice < usefulPiecesParameters.size){
-						c_origem = usefulPieces[choice].line;
-						l_origem =	usefulPieces[choice].column;
+						c_origem = usefulPieces[choice].column;
+						l_origem = usefulPieces[choice].line;
 					}else{
 						printf("opcao invalida\n");
 						continue;

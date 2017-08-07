@@ -241,25 +241,27 @@ void usefulPiecesFunction (int line, int column, PIECES **usefulPieces, DYNAMICV
 		//printf("here - if\n");
 		usefulPiecesParameters->capacity = 2;
 		usefulPiecesParameters->size = 1;
-		*usefulPieces = malloc(100*sizeof(PIECES));
-		(*usefulPieces)[1].line = line;
-		(*usefulPieces)[1].column = column;
+		*usefulPieces = malloc(2*sizeof(PIECES));
 
 	}else{
 		//printf("here - else\n");
+		printf("%d\n", usefulPiecesParameters->size);
 		(usefulPiecesParameters->size)++;
-			if(usefulPiecesParameters->size == usefulPiecesParameters->capacity){
-				(usefulPiecesParameters->capacity) *= 2;
-				aux = realloc(*usefulPieces, (usefulPiecesParameters->capacity) * sizeof(PIECES));
-				free(*usefulPieces);
-				*usefulPieces = aux;
+		if(usefulPiecesParameters->size == usefulPiecesParameters->capacity){
+			(usefulPiecesParameters->capacity) *= 2;
+			aux = realloc(*usefulPieces, (usefulPiecesParameters->capacity) * sizeof(PIECES));
+			free(*usefulPieces);
+			*usefulPieces = aux;
 
-			}
-			//printf("here - else   %d    %d\n", usefulPiecesParameters->size, (usefulPiecesParameters->capacity));
-			(*usefulPieces)[(usefulPiecesParameters->size) -1].line = line;
-			(*usefulPieces)[(usefulPiecesParameters->size) -1].column = column;
-			//printf("here - else\n");
+		}
+		//printf("here - else   %d    %d\n", usefulPiecesParameters->size, (usefulPiecesParameters->capacity));
+
+		//printf("here - else\n");
 
 	}
+
+		(*usefulPieces)[(usefulPiecesParameters->size) -1].line = line;
+		(*usefulPieces)[(usefulPiecesParameters->size) -1].column = column;
+		printf("here - else   %d %d    %d\n", (usefulPiecesParameters->size -1), (*usefulPieces)[(usefulPiecesParameters->size) -1].line, (*usefulPieces)[(usefulPiecesParameters->size) -1].column);
 
 }

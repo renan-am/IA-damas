@@ -6,7 +6,7 @@
 
 int distancia (int l_origem, int tipo){  //retorna quantas linhas até a pedra virar damas (fim do tabuleiro)
 	if (tipo == 1)
-		return l_origem; 
+		return l_origem;
 	else if (tipo == 2)
 		return (LIN_MAX - l_origem);
 	else
@@ -33,8 +33,3 @@ int protege (BOARD *tab, int c_origem, int l_origem){   //retorna numero de pedr
 
 	return count;
 }
-
-
-
-
-
