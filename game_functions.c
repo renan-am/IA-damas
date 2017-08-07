@@ -250,7 +250,9 @@ void usefulPiecesFunction (int line, int column, PIECES **usefulPieces, DYNAMICV
 		if(usefulPiecesParameters->size == usefulPiecesParameters->capacity){
 			(usefulPiecesParameters->capacity) *= 2;
 			aux = realloc(*usefulPieces, (usefulPiecesParameters->capacity) * sizeof(PIECES));
-			free(*usefulPieces);
+			if (!aux){
+				printf ("Erro de realloc na func usefulpieces\n");
+			}
 			*usefulPieces = aux;
 
 		}
@@ -263,5 +265,6 @@ void usefulPiecesFunction (int line, int column, PIECES **usefulPieces, DYNAMICV
 		(*usefulPieces)[(usefulPiecesParameters->size) -1].line = line;
 		(*usefulPieces)[(usefulPiecesParameters->size) -1].column = column;
 		printf("here - else   %d %d    %d\n", (usefulPiecesParameters->size -1), (*usefulPieces)[(usefulPiecesParameters->size) -1].line, (*usefulPieces)[(usefulPiecesParameters->size) -1].column);
+			printf("here - else   %d %d    %d\n", (usefulPiecesParameters->size -1), (*usefulPieces)[0].line, (*usefulPieces)[0].column);
 
 }

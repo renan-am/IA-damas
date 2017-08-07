@@ -146,10 +146,7 @@ int main (){
 					getchar();
 					c_origem = usefulPieces[usefulPiecesParameters.size].column;
 					l_origem = usefulPieces[usefulPiecesParameters.size].line;
-
-
 				}else{
-
 					int choice = 0;
 					printf("Escolha a opcao correspondente à peça que deseja usar para comer:\n");
 					for(int i = 0; i < usefulPiecesParameters.size; i++){
@@ -160,18 +157,17 @@ int main (){
 					scanf(" %d", &choice);
 					getchar();
 					choice--;
-					if(choice < usefulPiecesParameters.size){
-						c_origem = usefulPieces[choice].column;
-						l_origem = usefulPieces[choice].line;
-					}else{
-						printf("opcao invalida\n");
-						continue;
-					}
+
+						if(choice < usefulPiecesParameters.size){
+								c_origem = usefulPieces[choice].column;
+								l_origem = usefulPieces[choice].line;
+						}else{
+								printf("opcao invalida\n");
+								continue;
+							}
 				}
 
-				free(usefulPieces);
-				usefulPiecesParameters.capacity = 0;
-				usefulPiecesParameters.size = 0;
+
 
 				if (validar(tab, c_origem, l_origem) == turno)
 					break;
@@ -179,6 +175,11 @@ int main (){
 					printf ("entrada invalida\n");
 				}
 			}
+
+			free(usefulPieces);
+			usefulPieces = NULL;
+			usefulPiecesParameters.capacity = 0;
+			usefulPiecesParameters.size = 0;
 
 			PATH **maiorcaminho = NULL;
 
