@@ -185,7 +185,7 @@ void imprimir (BOARD *tab){ // imprime tabuleiro e legenda das linhas e colunas
 }
 
 
-int checarAcao (BOARD *tab, int coluna, int linha, PIECES *usefulPieces, DYNAMICVEC *usefulPiecesParameters){ //retorna 0 se não houver nenhuma ação possivel, retorna 1 se puder se movimentar, retorna 2 se puder capturar
+int checarAcao (BOARD *tab, int coluna, int linha, PIECES **usefulPieces, DYNAMICVEC *usefulPiecesParameters){ //retorna 0 se não houver nenhuma ação possivel, retorna 1 se puder se movimentar, retorna 2 se puder capturar
 
 	int flagcomeu = 0;
 	int flagmoveu = 0;
@@ -209,7 +209,7 @@ int checarAcao (BOARD *tab, int coluna, int linha, PIECES *usefulPieces, DYNAMIC
 		return 0;
 }
 
-char checarJogada (BOARD *tab, int jogador, PIECES *usefulPieces, DYNAMICVEC *usefulPiecesParameters){
+char checarJogada (BOARD *tab, int jogador, PIECES **usefulPieces, DYNAMICVEC *usefulPiecesParameters){
 	int jogada = 0, aux = 0;
 	int flagmoveu = 0, flagcomeu = 0;
 
@@ -234,27 +234,32 @@ char checarJogada (BOARD *tab, int jogador, PIECES *usefulPieces, DYNAMICVEC *us
 
 }
 
-void usefulPiecesFunction (int line, int column, PIECES* usefulPieces, DYNAMICVEC *usefulPiecesParameters){
+void usefulPiecesFunction (int line, int column, PIECES **usefulPieces, DYNAMICVEC *usefulPiecesParameters){
 	PIECES *aux = NULL;
 
-	if(usefulPieces == NULL){
+	if(*usefulPieces == NULL){
 		//printf("here - if\n");
 		usefulPiecesParameters->capacity = 2;
 		usefulPiecesParameters->size = 1;
-		usefulPieces = malloc(2*sizeof(PIECES));
-		usefulPieces[0].line = line;
-		usefulPieces[0].column = column;
+		*usefulPieces = malloc(100*sizeof(PIECES));
+		(*usefulPieces)[1].line = line;
+		(*usefulPieces)[1].column = column;
+
 	}else{
 		//printf("here - else\n");
 		(usefulPiecesParameters->size)++;
 			if(usefulPiecesParameters->size == usefulPiecesParameters->capacity){
 				(usefulPiecesParameters->capacity) *= 2;
-				aux = realloc(usefulPieces, (usefulPiecesParameters->capacity) * sizeof(PIECES));
-				free(usefulPieces);
-				usefulPieces = aux;
+				aux = realloc(*usefulPieces, (usefulPiecesParameters->capacity) * sizeof(PIECES));
+				free(*usefulPieces);
+				*usefulPieces = aux;
+
 			}
-			usefulPieces[usefulPiecesParameters->size -1].line = line;
-			usefulPieces[usefulPiecesParameters->size -1].column = column;
+			//printf("here - else   %d    %d\n", usefulPiecesParameters->size, (usefulPiecesParameters->capacity));
+			(*usefulPieces)[(usefulPiecesParameters->size) -1].line = line;
+			(*usefulPieces)[(usefulPiecesParameters->size) -1].column = column;
+			//printf("here - else\n");
+
 	}
 
 }

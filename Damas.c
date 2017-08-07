@@ -29,7 +29,7 @@ int main (){
 		//printf ("Mover ou Capturar? (M/C): ");
 		//scanf (" %c", &acao);
 
-		acao = checarJogada (tab, turno, usefulPieces, &usefulPiecesParameters);
+		acao = checarJogada (tab, turno, &usefulPieces, &usefulPiecesParameters);
 
 		if (acao == 'm')
 			printf ("Por favor escolha pedra a ser movida\n");
@@ -139,7 +139,7 @@ int main (){
 
 			while (1){
 				printf("Existe(m) peça(s) que são obrigada(s) a realizar a ação de comer:\n");
-				printf("%d %d\n\n",usefulPieces[usefulPiecesParameters.size - 1].column, usefulPieces[usefulPiecesParameters.size - 1].line);
+				//printf("%d %d\n\n",usefulPieces[usefulPiecesParameters.size - 1].column, usefulPieces[usefulPiecesParameters.size - 1].line);
 				if(usefulPiecesParameters.size == 1){
 					printf("Opcao unica: (%c%c)\n", usefulPieces[usefulPiecesParameters.size - 1].column + 'a', usefulPieces[usefulPiecesParameters.size - 1].line + '1');
 					printf("Aperte enter para continuar\n");
