@@ -194,7 +194,7 @@ int checarAcao (BOARD *tab, int coluna, int linha, PIECES *usefulPieces, DYNAMIC
 			for (int j = -1; j < 2; j += 2){
 				if (checarSeCome(tab, coluna, linha, coluna+i, linha+j, 0) == 1){ //checar se pode capturar alguma coisa
 					flagcomeu = 1;
-					usefulPiecesFunction(coluna, linha, usefulPieces, usefulPiecesParameters);
+					usefulPiecesFunction(linha, coluna, usefulPieces, usefulPiecesParameters);
 				}
 				else if (validar (tab, coluna+i, linha+j) == 0 && tab[POS].tipo > 0)
 					flagmoveu = 1;
@@ -238,12 +238,14 @@ void usefulPiecesFunction (int line, int column, PIECES* usefulPieces, DYNAMICVE
 	PIECES *aux = NULL;
 
 	if(usefulPieces == NULL){
+		//printf("here - if\n");
 		usefulPiecesParameters->capacity = 2;
 		usefulPiecesParameters->size = 1;
 		usefulPieces = malloc(2*sizeof(PIECES));
 		usefulPieces[0].line = line;
 		usefulPieces[0].column = column;
 	}else{
+		//printf("here - else\n");
 		(usefulPiecesParameters->size)++;
 			if(usefulPiecesParameters->size == usefulPiecesParameters->capacity){
 				(usefulPiecesParameters->capacity) *= 2;

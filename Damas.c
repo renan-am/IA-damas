@@ -16,6 +16,10 @@ int main (){
 	char acao;
 	char input[10] = "0";
 	BOARD *tab = NULL;
+	PIECES *usefulPieces = NULL;
+	DYNAMICVEC usefulPiecesParameters;
+	usefulPiecesParameters.capacity = 0;
+	usefulPiecesParameters.size = 0;
 
 	tab = GAME (0,0,0,0,NULL);
 
@@ -24,10 +28,6 @@ int main (){
 		printf ("Turno do Jogador: %d\n", turno);
 		//printf ("Mover ou Capturar? (M/C): ");
 		//scanf (" %c", &acao);
-		PIECES *usefulPieces = NULL;
-		DYNAMICVEC usefulPiecesParameters;
-		usefulPiecesParameters.capacity = 0;
-		usefulPiecesParameters.size = 0;
 
 		acao = checarJogada (tab, turno, usefulPieces, &usefulPiecesParameters);
 
