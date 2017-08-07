@@ -147,9 +147,7 @@ int main (){
 					c_origem = usefulPieces[usefulPiecesParameters.size].column;
 					l_origem = usefulPieces[usefulPiecesParameters.size].line;
 
-					free(usefulPieces);
-					usefulPiecesParameters.capacity = 0;
-					usefulPiecesParameters.size = 0;
+
 				}else{
 
 					int choice = 0;
@@ -170,6 +168,10 @@ int main (){
 						continue;
 					}
 				}
+
+				free(usefulPieces);
+				usefulPiecesParameters.capacity = 0;
+				usefulPiecesParameters.size = 0;
 
 				if (validar(tab, c_origem, l_origem) == turno)
 					break;
