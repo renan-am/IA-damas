@@ -12,14 +12,14 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 		posicionarpedras(tabuleiro);
 
 		/*
-				int vet[COL_MAX*LIN_MAX] =     {0, 1, 0, 1, 0, 1, 0, 1,
-								0, 0, 0, 0, 1, 0, 1, 0,
-								0, 0, 0, 1, 0, 0, 0, 1,
-								1, 0, 0, 0, 0, 0, 0, 0,
-								0, 0, 0, 0, 0, 2, 0, 1,
-								2, 0, 2, 0, 2, 0, 2, 0,
-								0, 2, 0, 0, 0, 0, 0, 0,
-								2, 0, 1, 0, 2, 0, 2, 0,
+				int vet[COL_MAX*LIN_MAX] =     {0, 0, 0, 0, 0, 0, 0, 0,
+								0, 0, 0, 0, 0, 0, 0, 0,
+								0, 0, 0, 0, 0, 0, 0, 0,
+								0, 0, 0, 0, 0, 0, 0, 0,
+								0, 1, 0, 1, 0, 0, 0, 0,
+								0, 0, 2, 0, 0, 0, 0, 0,
+								0, 0, 0, 0, 0, 0, 0, 0,
+								0, 0, 0, 0, 0, 0, 0, 0,
 								};
 
 				for (int linha = 0; linha < LIN_MAX; linha++)
@@ -30,7 +30,7 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 						else
 						tabuleiro[POS].classe = vet[POS];
 					}
-		*/
+			*/
 
 
 
@@ -192,12 +192,25 @@ int checarAcao (BOARD *tab, int coluna, int linha, PIECES **usefulPieces, DYNAMI
 
 		for (int i = -1; i < 2; i += 2){
 			for (int j = -1; j < 2; j += 2){
-				if (checarSeCome(tab, coluna, linha, coluna+i, linha+j, 0) == 1){ //checar se pode capturar alguma coisa
-					flagcomeu = 1;
-					usefulPiecesFunction(linha, coluna, usefulPieces, usefulPiecesParameters);
+				if (tab[POS].classe == 1){
+					if (checarSeCome(tab, coluna, linha, coluna+i, linha+j, 0) == 1){ //checar se pode capturar alguma coisa
+						flagcomeu = 1;
+						usefulPiecesFunction(linha, coluna, usefulPieces, usefulPiecesParameters);
+						return 2;
+					}
+					else if (validar (tab, coluna+i, linha+j) == 0 && tab[POS].tipo > 0)
+						flagmoveu = 1;
+				}	else if (tab[POS].classe == 2){
+						for (int k = 0; validar(tab, coluna+((k+1)*i), linha+((k+1)*j)) >= 0; k++){
+							if (checarSeCome(tab, coluna+k*i, linha+k*j,  coluna+((k+1)*i), linha+((k+1)*j), tab[POS].tipo)){
+								flagcomeu = 1;
+								usefulPiecesFunction(linha, coluna, usefulPieces, usefulPiecesParameters);
+								return 2;
+							}
+							else if (validar (tab, coluna+i, linha+j) == 0 && tab[POS].tipo > 0)
+								flagmoveu = 1;
+						}
 				}
-				else if (validar (tab, coluna+i, linha+j) == 0 && tab[POS].tipo > 0)
-					flagmoveu = 1;
 			}
 		}
 
@@ -238,14 +251,11 @@ void usefulPiecesFunction (int line, int column, PIECES **usefulPieces, DYNAMICV
 	PIECES *aux = NULL;
 
 	if(*usefulPieces == NULL){
-		//printf("here - if\n");
 		usefulPiecesParameters->capacity = 2;
 		usefulPiecesParameters->size = 1;
 		*usefulPieces = malloc(2*sizeof(PIECES));
 
 	}else{
-		//printf("here - else\n");
-		printf("%d\n", usefulPiecesParameters->size);
 		(usefulPiecesParameters->size)++;
 		if(usefulPiecesParameters->size == usefulPiecesParameters->capacity){
 			(usefulPiecesParameters->capacity) *= 2;
@@ -256,15 +266,10 @@ void usefulPiecesFunction (int line, int column, PIECES **usefulPieces, DYNAMICV
 			*usefulPieces = aux;
 
 		}
-		//printf("here - else   %d    %d\n", usefulPiecesParameters->size, (usefulPiecesParameters->capacity));
-
-		//printf("here - else\n");
 
 	}
 
 		(*usefulPieces)[(usefulPiecesParameters->size) -1].line = line;
 		(*usefulPieces)[(usefulPiecesParameters->size) -1].column = column;
-		printf("here - else   %d %d    %d\n", (usefulPiecesParameters->size -1), (*usefulPieces)[(usefulPiecesParameters->size) -1].line, (*usefulPieces)[(usefulPiecesParameters->size) -1].column);
-			printf("here - else   %d %d    %d\n", (usefulPiecesParameters->size -1), (*usefulPieces)[0].line, (*usefulPieces)[0].column);
 
 }

@@ -141,17 +141,16 @@ int main (){
 				printf("Existe(m) peça(s) que são obrigada(s) a realizar a ação de comer:\n");
 				//printf("%d %d\n\n",usefulPieces[usefulPiecesParameters.size - 1].column, usefulPieces[usefulPiecesParameters.size - 1].line);
 				if(usefulPiecesParameters.size == 1){
-					printf("Opcao unica: (%c%c)\n", usefulPieces[usefulPiecesParameters.size - 1].column + 'a' + 1, usefulPieces[usefulPiecesParameters.size - 1].line + '1'+ 1);
+					printf("Opcao unica: %c%c\n", usefulPieces[usefulPiecesParameters.size - 1].column + 'A', usefulPieces[usefulPiecesParameters.size - 1].line + '1');
 					printf("Aperte enter para continuar\n");
 					getchar();
-					c_origem = usefulPieces[usefulPiecesParameters.size].column;
-					l_origem = usefulPieces[usefulPiecesParameters.size].line;
+					c_origem = usefulPieces[usefulPiecesParameters.size-1].column;
+					l_origem = usefulPieces[usefulPiecesParameters.size-1].line;
 				}else{
 					int choice = 0;
 					printf("Escolha a opcao correspondente à peça que deseja usar para comer:\n");
 					for(int i = 0; i < usefulPiecesParameters.size; i++){
-						//printf("%d - %c%c\n",i+1 , usefulPieces[i].line + 'a' + 1, usefulPieces[i].column + '1' + 1);
-						printf("%d - %d%d\n",i+1 , usefulPieces[i].line, usefulPieces[i].column);
+						printf("%d - %c%c\n",i+1 , usefulPieces[i].column + 'A', usefulPieces[i].line + '1');
 					}
 					printf("Digite:\n");
 					scanf(" %d", &choice);
@@ -199,7 +198,7 @@ int main (){
 
 			printf ("Escolha o caminho a ser serguido: \n");
 
-			for (int i = 0; i < 100; i++){
+			for (i = 0; i < 100; i++){
 				if (maiorcaminho[i][0].posXcomida == 0 && maiorcaminho[i][0].posYcomida == 0){
 					//printf ("morreu aqui 2\n");
 						break;
@@ -216,9 +215,17 @@ int main (){
 				printf ("\n"); // imprime os caminhos
 			}
 
-			scanf (" %d", &track);
-			getchar();
-			track--;
+			while (1){
+				scanf (" %d", &track);
+				getchar();
+					if (track > i){
+						printf ("caminho inválido, tente de novo: ");
+						continue;
+					}
+				track--;
+				break;
+			}
+
 			for (i = 0; i< 100; i++){
 				if (maiorcaminho[track][i].posXcomida == 0 && maiorcaminho[track][i].posYcomida == 0){
 					i--;
@@ -231,34 +238,19 @@ int main (){
 				free (maiorcaminho);
 			}
 			else if (tab[l_origem*COL_MAX+c_origem].classe == 2){
-				while(1){
-					while (1){
-					printf ("Digite a coluna de destino: ");
-					scanf ("%d", &c_destino);
-					c_destino--;
-					if (c_destino >= COL_MAX || c_destino < 0)
-						printf ("Coluna invalida, tente novamente\n");
-					else
-						break;
-				}
-
 				while (1){
-					printf ("Digite a linha de destino: ");
-					scanf (" %d", &l_destino);
-					getchar();
-					l_destino--;
-					if (l_destino >= COL_MAX || l_destino < 0)
-						printf ("Coluna invalida, tente novamente\n");
-					else
-						break;
-				}
+					printf ("Escolha casa de destino da Dama após a ação de comer\nex ('C4' irá parar na casa C4): ");
+					fgets (input, 10, stdin);
+					input[0] = tolower(input[0]);
 
-				if (tab[l_destino*COL_MAX+c_destino].tipo != 0)  // A coordenada indicada esta ocupada, a pedra nao podera ser movida para ca
-					printf ("Ja tem uma pedra en Coluna: %d, Linha: %d\nDigite uma posicao valida\n", c_origem+1, l_origem+1);
-				else if ((l_destino+1)*(c_destino+1) % 2 != 0)
-					printf ("Local de destino invalido. Digite uma posicao valida\n");
-				else
-					break;
+					c_destino = input[0] - 'a';
+					l_destino = input[1] - '1';
+
+					if (validar(tab, c_origem, l_origem) == turno  && validar(tab, c_destino, l_destino) == 0)
+						break;
+					else{
+						printf ("entrada invalida\n");
+					}
 				}
 				tab = GAME (c_origem, l_origem, c_destino, l_destino, maiorcaminho[track]);
 				free (maiorcaminho);
