@@ -139,7 +139,7 @@ int main (){
 
 			while (1){
 				printf("Existe(m) peça(s) que são obrigada(s) a realizar a ação de comer:\n");
-				printf("%d %d\n\n",usefulPieces[usefulPiecesParameters.size].column, usefulPieces[usefulPiecesParameters.size].line);
+				printf("%d %d\n\n",usefulPieces[usefulPiecesParameters.size - 1].column, usefulPieces[usefulPiecesParameters.size - 1].line);
 				if(usefulPiecesParameters.size == 1){
 					printf("Opcao unica: (%c%c)\n", usefulPieces[usefulPiecesParameters.size - 1].column + 'a', usefulPieces[usefulPiecesParameters.size - 1].line + '1');
 					printf("Aperte enter para continuar\n");

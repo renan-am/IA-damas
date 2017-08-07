@@ -244,7 +244,7 @@ void usefulPiecesFunction (int line, int column, PIECES* usefulPieces, DYNAMICVE
 		usefulPieces[0].line = line;
 		usefulPieces[0].column = column;
 	}else{
-		usefulPiecesParameters->size++;
+		(usefulPiecesParameters->size)++;
 			if(usefulPiecesParameters->size == usefulPiecesParameters->capacity){
 				(usefulPiecesParameters->capacity) *= 2;
 				aux = realloc(usefulPieces, (usefulPiecesParameters->capacity) * sizeof(PIECES));
