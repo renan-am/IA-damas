@@ -106,8 +106,15 @@ int main (){
 			*/
 
 			while (1){
-				printf ("ex ('A6 C4' move pedra de A6 para C4): ");
+				printf ("ex ('A6 B5' move pedra de A6 para B5): ");
 				fgets (input, 10, stdin);
+
+				if (strlen(input) != 6){
+					printf ("entrada invalida, por favor escreva no formato 'A1 B2'\n");
+					continue;
+				}
+
+
 				input[0] = tolower(input[0]);
 				input[3] = tolower(input[3]);
 
