@@ -20,9 +20,9 @@ static void saveWayDama(PATH *auxWay, int auxSize, PATH **bankOfWays, int counte
 
 	for(int i = 0; i < auxSize; i++){
 		bankOfWays[counterWaysDama][i] = auxWaysToWinDama[i];
-		tamanhoDama[counterWaysDama] = auxSize; 
+		tamanhoDama[counterWaysDama] = auxSize;
 	}
-	
+
 }
 
 static int PossiblePathsDama(BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i){
@@ -53,7 +53,7 @@ static int PossiblePathsDama(BOARD *tabuleiro ,int posAtualX , int posAtualY, in
 		for(int j = 0; j < temp; j++, i = (i+1)%4 ){
 
 			int z = 0;
-			
+
 			if(checarSeCome(vet ,posAtualX, posAtualY, posAtualX+possiblePathsXDama[i], posAtualY+possiblePathsYDama[i], type) && temp == 3){
 					//printf ("ali\n");
 
@@ -75,12 +75,12 @@ static int PossiblePathsDama(BOARD *tabuleiro ,int posAtualX , int posAtualY, in
 				//printf ("sfyysaguidasghdhasudhaush\n");
 				do{
 					if(checarSeCome(vet ,posAtualX+z*possiblePathsXDama[i], posAtualY+z*possiblePathsYDama[i], posAtualX+((z+1)*possiblePathsXDama[i]), posAtualY+((z+1)*possiblePathsYDama[i]), type) && temp != 3){
-				
+
 						auxWaysToWinDama[waySizeDama].posXfinal = posAtualX + (z+2)*possiblePathsXDama[i];
 						auxWaysToWinDama[waySizeDama].posYfinal = posAtualY + (z+2)*possiblePathsYDama[i];
 						auxWaysToWinDama[waySizeDama].posXcomida = posAtualX+((z+1)*possiblePathsXDama[i]);
 						auxWaysToWinDama[waySizeDama].posYcomida = posAtualY+((z+1)*possiblePathsYDama[i]);
-					
+
 						waySizeDama++;
 						aux = vet[(posAtualY+((z+1)*possiblePathsYDama[i])) * COL_MAX + posAtualX+((z+1)*possiblePathsXDama[i])].tipo;
 						vet[(posAtualY+possiblePathsYDama[i]) * COL_MAX + posAtualX+possiblePathsXDama[i]].tipo = type;
@@ -90,12 +90,11 @@ static int PossiblePathsDama(BOARD *tabuleiro ,int posAtualX , int posAtualY, in
 					}
 					z++;
 
-
 				}while(validar(vet, posAtualX+z*possiblePathsXDama[i], posAtualY+z*possiblePathsYDama[i]) == 0);
 			}
 
 				if(j == temp-1 && validar(vet, posAtualX+possiblePathsXDama[i2], posAtualY+possiblePathsYDama[i2]) == 0 && temp == 3){
-					//printf ("here\n");					
+					//printf ("here\n");
 					j = -1;
 					posAtualX += possiblePathsXDama[i2];
 					posAtualY += possiblePathsYDama[i2];
@@ -105,12 +104,12 @@ static int PossiblePathsDama(BOARD *tabuleiro ,int posAtualX , int posAtualY, in
 
 		}
 
-		
+
 		saveWayDama(auxWaysToWinDama, waySizeDama, waysToWinDama, counterWaysDama);
 		counterWaysDama++;
-		
+
 		return 1;
-			
+
 }
 
 PATH **EncontrarCaminhoDama (BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i){
@@ -142,7 +141,7 @@ PATH **EncontrarCaminhoDama (BOARD *tabuleiro ,int posAtualX , int posAtualY, in
 		for (int i = 0; i<100; i++)
 			if (tamanhoDama[i] == maximo){
 				indMAX[k] = i;
-				k++; 
+				k++;
 			}
 
 		PATH **best;
@@ -174,6 +173,3 @@ PATH **EncontrarCaminhoDama (BOARD *tabuleiro ,int posAtualX , int posAtualY, in
 
 
 }
-
-
-	

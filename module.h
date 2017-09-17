@@ -3,17 +3,17 @@
 #define POS linha*COL_MAX+coluna
 
 typedef struct{
-	int capacity;
-	int size;
-	PIECES *vector
-
-} DYNAMICVEC;
-
-typedef struct{
 	int line;
 	int column;
 
 } PIECES;
+
+typedef struct{
+	int capacity;
+	int size;
+	PIECES *vector;
+
+} DYNAMICVEC;
 
 typedef struct {
 

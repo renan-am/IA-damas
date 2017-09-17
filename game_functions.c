@@ -80,6 +80,7 @@ void posicionarpedras (BOARD *tab){   //inicializa o tabuleiro, com pedras tipo 
 	for (linha = 0; linha < LIN_MAX; linha++)
 		for (coluna = 0; coluna < COL_MAX; coluna++){
 			tab[POS].tipo = 0;
+			tab[POS].classe = 0;
 		}
 
 	for (linha = 0; linha < (LIN_MAX-2)/2; linha++)
@@ -97,6 +98,7 @@ void posicionarpedras (BOARD *tab){   //inicializa o tabuleiro, com pedras tipo 
 	for (linha = 0; linha < LIN_MAX; linha++)
 			for (coluna = linha%2; coluna < COL_MAX; coluna += 2)
 				tab[POS].tipo = -1;
+				tab[POS].classe = -1;
 }
 
 void mover (BOARD *tab, int c_origem, int l_origem, int c_destino, int l_destino){    //move pedra da posicao de origem para a posiçao destino no tabuleiro *tab
@@ -274,51 +276,66 @@ void usefulPiecesFunction (int line, int column, PIECES **usefulPieces, DYNAMICV
 
 }
 
-int **goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int tipo){
+DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int tipo){
 
 	pathsX[4] = { 1, -1, -1, 1};
 	pathsY[4] = {-1, -1, 1, 1};
 
 	if(classe == 1){
 
-		DYNAMICVEC pathResult;
-		pathResult.size = 2;
-		pathResult.capacity = 2;
-		pathResult.vector = malloc(2*sizeof(PIECES));
+		DYNAMICVEC *pathResult;
+		pathResult->size = 2;
+		pathResult->capacity = 2;
+		pathResult->vector = malloc(2*sizeof(PIECES));
 
 		if(tipo == 1){
-			
 			for(int i = 2; i < 4; i++){
-				if(validar(tab, Xposition + pathX[i], Yposition + pathY[i]) == 0)
-					pathResult.vector[i-2]->column = Xposition + pathX[i];
-					pathResult.vector[i-2]->line = Yposition + pathY[i];
-				else
-					pathResult.vector[i]->column = -1;
-					pathResult.vector[i]->line = -1;
-
+				if(validar(tab, Xposition + pathX[i], Yposition + pathY[i]) == 0){
+					pathResult->vector[i-2]->column = Xposition + pathX[i];
+					pathResult->vector[i-2]->line = Yposition + pathY[i];
+				}else{
+					pathResult->vector[i-2]->column = -1;
+					pathResult->vector[i-2]->line = -1;
+				}
 			}
+		}
 
 			if(tipo == 2){
 				for(int i = 0; i < 2; i++){
-					if(validar(tab, Xposition + pathX[i], Yposition + pathY[i]) == 0)
-						pathResult.vector[i]->column = Xposition + pathX[i];
-						pathResult.vector[i]->line = Yposition + pathY[i];
-					else
-						pathResult.vector[i]->column = -1;
-						pathResult.vector[i]->line = -1;
-
+					if(validar(tab, Xposition + pathX[i], Yposition + pathY[i]) == 0){
+						pathResult->vector[i]->column = Xposition + pathX[i];
+						pathResult->vector[i]->line = Yposition + pathY[i];
+					}else{
+						pathResult->vector[i]->column = -1;
+						pathResult->vector[i]->line = -1;
+					}
 				}
-
-
 		}
 
+		return pathResult;
 
 	}else if(classe == 2){
 
+		DYNAMICVEC *pathResult;
+		pathResult->size = (COL_MAX - 1)*4;
+		pathResult->capacity = (COL_MAX - 1)*4;
+		pathResult->vector = malloc((COL_MAX - 1)*4*sizeof(PIECES));
+
+		for(int z = 1; z <= COL_MAX ;z++)
+			for(int i = 0; i < 4; i++){
+				if(validar(tab, Xposition + z*pathX[i], Yposition + z*pathY[i]) == 0){
+					pathResult->vector[(z-1)*4 +i]->column = Xposition + pathX[i];
+					pathResult->vector[(z-1)*4 +i]->line = Yposition + pathY[i];
+				}else{
+					pathResult->vector[(z-1)*4 +i]->column = -1;
+					pathResult->vector[(z-1)*4 +i]->line = -1;
+
+		}
+
+		return pathResult;
 
 
-
-	}else if(classe == 0)
+	}else if(classe <= 0)
 		return NULL;
 
 
