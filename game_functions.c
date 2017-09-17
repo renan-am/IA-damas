@@ -327,8 +327,7 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 						pathResult->vector[(z-1)*4 +i]->column = Xposition + pathX[i];
 						pathResult->vector[(z-1)*4 +i]->line = Yposition + pathY[i];
 					}else{
-						pathResult->vector[(z-1)*4 +i]->column = -1;
-						pathResult->vector[(z-1)*4 +i]->line = -1;
+						break;
 					}
 			}
 
