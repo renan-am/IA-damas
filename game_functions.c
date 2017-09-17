@@ -319,18 +319,18 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 		DYNAMICVEC *pathResult;
 		pathResult->size = (COL_MAX - 1)*4;
 		pathResult->capacity = (COL_MAX - 1)*4;
-		pathResult->vector = malloc((COL_MAX - 1)*4*sizeof(PIECES));
+		pathResult->vector = calloc((COL_MAX - 1)*4, sizeof(PIECES));
 
-		for(int z = 1; z <= COL_MAX ;z++)
-			for(int i = 0; i < 4; i++){
-				if(validar(tab, Xposition + z*pathX[i], Yposition + z*pathY[i]) == 0){
-					pathResult->vector[(z-1)*4 +i]->column = Xposition + pathX[i];
-					pathResult->vector[(z-1)*4 +i]->line = Yposition + pathY[i];
-				}else{
-					pathResult->vector[(z-1)*4 +i]->column = -1;
-					pathResult->vector[(z-1)*4 +i]->line = -1;
-
-		}
+		for(int i = 0; i < 4; i++)
+				for(int z = 1; z <= COL_MAX ;z++){
+					if(validar(tab, Xposition + z*pathX[i], Yposition + z*pathY[i]) == 0){
+						pathResult->vector[(z-1)*4 +i]->column = Xposition + pathX[i];
+						pathResult->vector[(z-1)*4 +i]->line = Yposition + pathY[i];
+					}else{
+						pathResult->vector[(z-1)*4 +i]->column = -1;
+						pathResult->vector[(z-1)*4 +i]->line = -1;
+					}
+			}
 
 		return pathResult;
 
