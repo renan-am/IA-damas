@@ -5,6 +5,7 @@
 typedef struct{
 	int capacity;
 	int size;
+	PIECES *vector
 
 } DYNAMICVEC;
 

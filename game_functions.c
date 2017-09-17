@@ -273,3 +273,53 @@ void usefulPiecesFunction (int line, int column, PIECES **usefulPieces, DYNAMICV
 		(*usefulPieces)[(usefulPiecesParameters->size) -1].column = column;
 
 }
+
+int **goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int tipo){
+
+	pathsX[4] = { 1, -1, -1, 1};
+	pathsY[4] = {-1, -1, 1, 1};
+
+	if(classe == 1){
+
+		DYNAMICVEC pathResult;
+		pathResult.size = 2;
+		pathResult.capacity = 2;
+		pathResult.vector = malloc(2*sizeof(PIECES));
+
+		if(tipo == 1){
+			
+			for(int i = 2; i < 4; i++){
+				if(validar(tab, Xposition + pathX[i], Yposition + pathY[i]) == 0)
+					pathResult.vector[i-2]->column = Xposition + pathX[i];
+					pathResult.vector[i-2]->line = Yposition + pathY[i];
+				else
+					pathResult.vector[i]->column = -1;
+					pathResult.vector[i]->line = -1;
+
+			}
+
+			if(tipo == 2){
+				for(int i = 0; i < 2; i++){
+					if(validar(tab, Xposition + pathX[i], Yposition + pathY[i]) == 0)
+						pathResult.vector[i]->column = Xposition + pathX[i];
+						pathResult.vector[i]->line = Yposition + pathY[i];
+					else
+						pathResult.vector[i]->column = -1;
+						pathResult.vector[i]->line = -1;
+
+				}
+
+
+		}
+
+
+	}else if(classe == 2){
+
+
+
+
+	}else if(classe == 0)
+		return NULL;
+
+
+}
