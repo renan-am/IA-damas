@@ -136,8 +136,9 @@ int main (){
 			int parada;
 			teste = goodPaths(tab, c_origem, l_origem, tab[l_origem*COL_MAX+c_origem].classe, tab[l_origem*COL_MAX+c_origem].tipo);
 			for(int i = 0; i < teste->size; i++)
-				printf("possibilidade %d: %c %d\n", i, teste->vector[i].line + 'A',  teste->vector[i].column);
+				printf("possibilidade %d: %c %d\n", i, teste->vector[i].column + 'A',  teste->vector[i].line + 1);
 			scanf("%d", &parada);
+		
 			tab = GAME (c_origem, l_origem, c_destino, l_destino, NULL);
 		}
 

@@ -9,16 +9,16 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 
 	if (!jogoiniciou){
 		tabuleiro = calloc (COL_MAX*LIN_MAX, sizeof(BOARD));
-		posicionarpedras(tabuleiro);
+	//	posicionarpedras(tabuleiro);
 
-		/*
+
 				int vet[COL_MAX*LIN_MAX] =     {0, 0, 0, 0, 0, 0, 0, 0,
+								0, 0, 0, 0, 2, 0, 0, 0,
 								0, 0, 0, 0, 0, 0, 0, 0,
 								0, 0, 0, 0, 0, 0, 0, 0,
 								0, 0, 0, 0, 0, 0, 0, 0,
-								0, 1, 0, 1, 0, 0, 0, 0,
-								0, 0, 2, 0, 0, 0, 0, 0,
 								0, 0, 0, 0, 0, 0, 0, 0,
+								0, 0, 1, 0, 0, 0, 0, 0,
 								0, 0, 0, 0, 0, 0, 0, 0,
 								};
 
@@ -30,7 +30,7 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 						else
 						tabuleiro[POS].classe = vet[POS];
 					}
-			*/
+
 
 
 
@@ -283,7 +283,7 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 
 	if(classe == 1){
 
-		DYNAMICVEC *pathResult;
+		DYNAMICVEC *pathResult = malloc(sizeof(DYNAMICVEC));
 		pathResult->size = 2;
 		pathResult->capacity = 2;
 		pathResult->vector = malloc(2*sizeof(PIECES));
@@ -316,7 +316,7 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 
 	}else if(classe == 2){
 
-		DYNAMICVEC *pathResult;
+		DYNAMICVEC *pathResult = malloc(sizeof(DYNAMICVEC));
 		pathResult->size = (COL_MAX - 1)*4;
 		pathResult->capacity = (COL_MAX - 1)*4;
 		pathResult->vector = calloc((COL_MAX - 1)*4, sizeof(PIECES));
@@ -324,12 +324,12 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 		for(int i = 0; i < 4; i++)
 				for(int z = 1; z <= COL_MAX ;z++){
 					if(validar(tab, Xposition + z*pathX[i], Yposition + z*pathY[i]) == 0){
-						pathResult->vector[(z-1)*4 +i].column = Xposition + pathX[i];
-						pathResult->vector[(z-1)*4 +i].line = Yposition + pathY[i];
+						pathResult->vector[(z-1)*4 +i].column = Xposition + z*pathX[i];
+						pathResult->vector[(z-1)*4 +i].line = Yposition + z*pathY[i];
 					}else{
 						break;
 					}
-			}
+				}
 
 		return pathResult;
 
