@@ -132,7 +132,12 @@ int main (){
 			}
 
 
-
+			DYNAMICVEC *teste = NULL;
+			int parada;
+			teste = goodPaths(tab, c_origem, l_origem, tab[l_origem*COL_MAX+c_origem].classe, tab[l_origem*COL_MAX+c_origem].tipo);
+			for(int i = 0; i < teste->size; i++)
+				printf("possibilidade %d: %c %d\n", i, teste->vector[i].line + 'A',  teste->vector[i].column);
+			scanf("%d", &parada);
 			tab = GAME (c_origem, l_origem, c_destino, l_destino, NULL);
 		}
 
