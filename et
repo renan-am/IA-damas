@@ -1,0 +1,64 @@
+* [31m8aba735[m -[33m (HEAD -> master, origin/master)[m minor edit [32m(27 segundos atrás) [1;34m<renan-am>[m
+* [31m1d5fad4[m -[33m[m minor edit [32m(9 minutos atrás) [1;34m<renan-am>[m
+* [31me425f89[m -[33m[m minor edit [32m(23 minutos atrás) [1;34m<renan-am>[m
+*   [31m98ae561[m -[33m[m Merge branch 'master' of git+ssh://github.com/renan-am/IA-damas [32m(54 minutos atrás) [1;34m<renan-am>[m
+[32m|[m[33m\[m  
+[32m|[m * [31m08d7624[m -[33m[m teste II 06/08 [32m(57 minutos atrás) [1;34m<Marcelo Vilela>[m
+* [33m|[m [31m8c887b2[m -[33m[m checarJogada checa todas que comem [32m(54 minutos atrás) [1;34m<renan-am>[m
+[33m|[m[33m/[m  
+* [31m3a72ae6[m -[33m[m teste06/08 [32m(77 minutos atrás) [1;34m<Marcelo Vilela>[m
+* [31m693a64a[m -[33m[m suporte a letra minuscula e maiuscula [32m(8 horas atrás) [1;34m<Renan>[m
+* [31m5de03cd[m -[33m[m input alterado para alfa-numerico [32m(23 horas atrás) [1;34m<Renan>[m
+* [31m995d8e3[m -[33m[m add funcao checar jogada [32m(24 horas atrás) [1;34m<Renan>[m
+* [31ma6531c1[m -[33m[m ajuste pela metade das legendas [32m(3 dias atrás) [1;34m<Renan Clarindo Amorim>[m
+* [31me4a7d91[m -[33m[m add funcao checarAcao [32m(3 dias atrás) [1;34m<Renan Clarindo Amorim>[m
+* [31meb5068d[m -[33m[m add funcao checarAcao [32m(3 dias atrás) [1;34m<Renan Clarindo Amorim>[m
+* [31m030f98d[m -[33m[m funciona [32m(5 dias atrás) [1;34m<Marcelo>[m
+* [31m3f7a90f[m -[33m[m jogo completo mas regras [32m(5 dias atrás) [1;34m<Renan>[m
+* [31m90e0520[m -[33m[m jogo completo mas regras [32m(5 dias atrás) [1;34m<Renan>[m
+* [31m2aa1012[m -[33m[m fixed: bug do loop de comida e bug de seg fault depois de comer nada [32m(5 dias atrás) [1;34m<Renan>[m
+* [31m1812735[m -[33m[m  Adicionado função queserão as regras [32m(5 dias atrás) [1;34m<Marcelo>[m
+* [31m43b88be[m -[33m[m arquivos da funçoes de comer damas unidos e adicionado suporte a damas ao jogo [32m(6 dias atrás) [1;34m<renan-am>[m
+* [31mc76bcbd[m -[33m[m tudo funciona, mas falta unificar as funções para comer e ainda fazer a seleção da função comer correta [32m(6 dias atrás) [1;34m<Marcelo>[m
+* [31m221232f[m -[33m[m bug da bifurcação final [32m(6 dias atrás) [1;34m<Marcelo>[m
+* [31md67e430[m -[33m[m versao funcional incompleta de funçao para comer damas [32m(6 dias atrás) [1;34m<Marcelo>[m
+* [31md5c719f[m -[33m[m função comerdamas falta segundo loop, funcionando parcial [32m(6 dias atrás) [1;34m<Marcelo>[m
+*   [31m89b10e1[m -[33m[m Merge branch 'master' of https://github.com/renan-am/IA-damas [32m(6 dias atrás) [1;34m<Marcelo>[m
+[34m|[m[35m\[m  
+[34m|[m * [31m141a448[m -[33m[m change [32m(6 dias atrás) [1;34m<Renan>[m
+[34m|[m * [31m198af57[m -[33m[m add comentario [32m(6 dias atrás) [1;34m<Renan>[m
+* [35m|[m [31m5d11956[m -[33m[m funçãoparacomerdamas adicionado (testes) [32m(6 dias atrás) [1;34m<Marcelo>[m
+[35m|[m[35m/[m  
+* [31md8f16e4[m -[33m[m minor bufixes [32m(11 dias atrás) [1;34m<Renan>[m
+* [31me25e38e[m -[33m[m add func remover, falta adicionar a dama [32m(11 dias atrás) [1;34m<Renan>[m
+* [31m222e931[m -[33m[m add func remover, falta adicionar a dama [32m(11 dias atrás) [1;34m<Renan>[m
+* [31m4a8123f[m -[33m[m add funcapracomer.c [32m(12 dias atrás) [1;34m<renan-am>[m
+* [31m849e969[m -[33m[m add funcapracomer.c [32m(12 dias atrás) [1;34m<renan-am>[m
+* [31m3956d86[m -[33m[m addicionado planejamento [32m(12 dias atrás) [1;34m<renan-am>[m
+* [31mb17cceb[m -[33m[m criado func game, validar; posiçoes invalidas do tabuleiro ganharam tipo -1 [32m(2 semanas atrás) [1;34m<Renan>[m
+* [31m7ce17ba[m -[33m[m add func distancia e protege [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31m21515b4[m -[33m[m alterado checarSeCome e adicionado func distancia [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31m44a0584[m -[33m[m update game_functions headers [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31ma390dcd[m -[33m[m pragma scale, removido tabuleiro como var global [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31m85eb3ca[m -[33m[m update damas [32m(2 semanas atrás) [1;34m<Renan>[m
+* [31me89fcd4[m -[33m[m checasecome impede comer pedras do mesmo jogador [32m(2 semanas atrás) [1;34m<Renan>[m
+* [31m1aca7aa[m -[33m[m edit struct BOARD [32m(2 semanas atrás) [1;34m<Renan>[m
+* [31m1f2fdbd[m -[33m[m add if para mover ou capturar pedra [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31m2d79859[m -[33m[m while(true) -> while(1) [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31m0934a1c[m -[33m[m while(1 == 1) -> while(true) [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31m9af4639[m -[33m[m while(1 == 1) -> while(true) [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31m78040fc[m -[33m[m reorganizacao geral [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31m7cc8314[m -[33m[m organizando .h [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31m94bce82[m -[33m[m organizando as func em arquivos separados [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31mcba84fd[m -[33m[m add decalraçao do struct em .h [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31ma11081d[m -[33m[m fixed module.h e add header pra func [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31m3843f26[m -[33m[m separando as func em arq diferentes [32m(2 semanas atrás) [1;34m<renan-am>[m
+* [31m65f37eb[m -[33m[m Rename module1.h to module.h [32m(2 semanas atrás) [1;34m<maviless>[m
+* [31m8cf7b9a[m -[33m[m Update Damas.c [32m(2 semanas atrás) [1;34m<maviless>[m
+* [31maf6f715[m -[33m[m Troca do nome do arquivo [32m(2 semanas atrás) [1;34m<maviless>[m
+* [31m132ff3d[m -[33m[m Mudanças 1 [32m(2 semanas atrás) [1;34m<maviless>[m
+* [31m3433023[m -[33m[m Create README.md [32m(3 semanas atrás) [1;34m<Renan>[m
+*   [31m94552ae[m -[33m[m Merge branch 'master' of https://github.com/renan-am/IA-damas [32m(3 semanas atrás) [1;34m<Renan>[m
+[36m|[m[1;31m\[m  
+[36m|[m * [31m676a305[m -[33m[m Initial commit [32m(3 semanas atrás) [1;34m<Renan>[m
+* [31m6f5fbc8[m -[33m[m commit inicial [32m(3 semanas atrás) [1;34m<Renan>[m

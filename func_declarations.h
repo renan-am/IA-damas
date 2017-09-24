@@ -27,11 +27,10 @@ void usefulPiecesFunction (int line, int column, PIECES **usefulPieces, DYNAMICV
 
 BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *pedrascomidas);
 
-
-
-
 PATH **EncontrarCaminho (BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i);
 PATH **EncontrarCaminhoDama (BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i);
+
+DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int tipo);
 
 
 #include "game_functions.c"

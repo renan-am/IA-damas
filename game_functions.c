@@ -278,8 +278,8 @@ void usefulPiecesFunction (int line, int column, PIECES **usefulPieces, DYNAMICV
 
 DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int tipo){
 
-	pathsX[4] = { 1, -1, -1, 1};
-	pathsY[4] = {-1, -1, 1, 1};
+	int pathX[4] = { 1, -1, -1, 1};
+	int pathY[4] = {-1, -1, 1, 1};
 
 	if(classe == 1){
 
@@ -291,11 +291,11 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 		if(tipo == 1){
 			for(int i = 2; i < 4; i++){
 				if(validar(tab, Xposition + pathX[i], Yposition + pathY[i]) == 0){
-					pathResult->vector[i-2]->column = Xposition + pathX[i];
-					pathResult->vector[i-2]->line = Yposition + pathY[i];
+					pathResult->vector[i-2].column = Xposition + pathX[i];
+					pathResult->vector[i-2].line = Yposition + pathY[i];
 				}else{
-					pathResult->vector[i-2]->column = -1;
-					pathResult->vector[i-2]->line = -1;
+					pathResult->vector[i-2].column = -1;
+					pathResult->vector[i-2].line = -1;
 				}
 			}
 		}
@@ -303,11 +303,11 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 			if(tipo == 2){
 				for(int i = 0; i < 2; i++){
 					if(validar(tab, Xposition + pathX[i], Yposition + pathY[i]) == 0){
-						pathResult->vector[i]->column = Xposition + pathX[i];
-						pathResult->vector[i]->line = Yposition + pathY[i];
+						pathResult->vector[i].column = Xposition + pathX[i];
+						pathResult->vector[i].line = Yposition + pathY[i];
 					}else{
-						pathResult->vector[i]->column = -1;
-						pathResult->vector[i]->line = -1;
+						pathResult->vector[i].column = -1;
+						pathResult->vector[i].line = -1;
 					}
 				}
 		}
@@ -324,8 +324,8 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 		for(int i = 0; i < 4; i++)
 				for(int z = 1; z <= COL_MAX ;z++){
 					if(validar(tab, Xposition + z*pathX[i], Yposition + z*pathY[i]) == 0){
-						pathResult->vector[(z-1)*4 +i]->column = Xposition + pathX[i];
-						pathResult->vector[(z-1)*4 +i]->line = Yposition + pathY[i];
+						pathResult->vector[(z-1)*4 +i].column = Xposition + pathX[i];
+						pathResult->vector[(z-1)*4 +i].line = Yposition + pathY[i];
 					}else{
 						break;
 					}
