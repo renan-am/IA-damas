@@ -343,9 +343,9 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 
 DYNAMICVEC *posicaoDamas (BOARD *tab, int coluna, int linha, PATH *pedrascomidas){
 	DYNAMICVEC *pathResult = malloc(sizeof(DYNAMICVEC));
-	pathResult->size = 2;
+	pathResult->size = 0;
 	pathResult->capacity = 2;
-	pathResult->vector = calloc(2,sizeof(PIECES));
+	pathResult->vector = calloc(COL_MAX,sizeof(PIECES));
 
 	int i, dirX, dirY, c_final, l_final;
 
