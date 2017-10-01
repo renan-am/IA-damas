@@ -32,6 +32,7 @@ PATH **EncontrarCaminhoDama (BOARD *tabuleiro ,int posAtualX , int posAtualY, in
 
 DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int tipo);
 
+DYNAMICVEC *selectiveClean(DYNAMICVEC *vector);
 
 #include "game_functions.c"
 #include "funcaopracomer.c"

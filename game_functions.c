@@ -357,8 +357,19 @@ DYNAMICVEC *posicaoDamas (BOARD *tab, int coluna, int linha, PATH *pedrascomidas
 	c_final = pedrascomidas[i].posXfinal;
 	l_final = pedrascomidas[i].posYfinal;
 
+	BOARD vet[COL_MAX*LIN_MAX];
+	int aux;
+	for (int l = 0; linha < LIN_MAX; l++)
+		for (int c = 0; coluna < COL_MAX; c++)
+			vet[l*COL_MAX+c].tipo = tab[l*COL_MAX+c].tipo;
+
+	vet[POS].tipo = 0;
+	vet[POS].classe = 0;
+
+
+
 	for (i = 0; i < COL_MAX; i++){
-		if (!validar(tab, c_final+(i*dirX), l_final+(i*dirY))){
+		if (!validar(vet, c_final+(i*dirX), l_final+(i*dirY))){
 			break;
 		} else {
 			pathResult->vector[i].column = c_final+(i*dirX);
