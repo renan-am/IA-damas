@@ -12,7 +12,7 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 	//	posicionarpedras(tabuleiro);
 
 
-				int vet[COL_MAX*LIN_MAX] =     {0, 0, 0, 0, 0, 0, 0, 0,
+	int vet[COL_MAX*LIN_MAX] = {0, 0, 0, 0, 0, 0, 0, 0,
 								0, 0, 0, 0, 2, 0, 0, 0,
 								0, 0, 0, 0, 0, 0, 0, 0,
 								0, 0, 0, 0, 0, 0, 0, 0,
@@ -336,6 +336,39 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 
 	}else if(classe <= 0)
 		return NULL;
+
+
+}
+
+
+DYNAMICVEC *posicaoDamas (BOARD *tab, int coluna, int linha, PATH *pedrascomidas){
+	DYNAMICVEC *pathResult = malloc(sizeof(DYNAMICVEC));
+	pathResult->size = 2;
+	pathResult->capacity = 2;
+	pathResult->vector = calloc(2,sizeof(PIECES));
+
+	int i, dirX, dirY, c_final, l_final;
+
+	for (i = 0; pedrascomidas[i+1].posXcomida == 0 && pedrascomidas[i+1].posYcomida; i++){};
+
+	dirX = pedrascomidas[i].posXfinal - pedrascomidas[i].posXcomida;
+	dirY = pedrascomidas[i].posYfinal - pedrascomidas[i].posYcomida;
+
+	c_final = pedrascomidas[i].posXfinal;
+	l_final = pedrascomidas[i].posYfinal;
+
+	for (i = 0; i < COL_MAX; i++){
+		if (!validar(tab, c_final+(i*dirX), l_final+(i*dirY))){
+			break;
+		} else {
+			pathResult->vector[i].column = c_final+(i*dirX);
+			pathResult->vector[i].line = l_final+(i*dirY);
+			(pathResult->size)++;
+		}
+	}
+
+	return pathResult;
+
 
 
 }
