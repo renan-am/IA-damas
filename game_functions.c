@@ -331,7 +331,7 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 					}
 				}
 
-		return pathResult;
+		return selectiveClean(pathResult);
 
 
 	}else if(classe <= 0)
@@ -371,4 +371,27 @@ DYNAMICVEC *posicaoDamas (BOARD *tab, int coluna, int linha, PATH *pedrascomidas
 
 
 
+}
+
+DYNAMICVEC *selectiveClean(DYNAMICVEC *vector){
+
+  int counter = 0;
+  for(int i = 0; i < (COL_MAX -1)*4; i++)
+    if(vector->vector[i].column == 0 && vector->vector[i].line == 0)
+      counter++;
+
+  DYNAMICVEC *pathResult = malloc(sizeof(DYNAMICVEC));
+  pathResult->size = counter;
+  pathResult->capacity = counter;
+  pathResult->vector = calloc(counter, sizeof(PIECES));
+
+  for(int i = 0, j = 0; i < (COL_MAX -1)*4; i++){
+    if(vector->vector[i].column != 0 && vector->vector[i].line != 0){
+      pathResult->vector[j].column = vector->vector[i].column;
+      pathResult->vector[j].line = vector->vector[i].line;
+      j++;
+    }
+  }
+
+	return pathResult;
 }
