@@ -63,7 +63,7 @@ int main (){
 
 				if (validar(tab, c_origem, l_origem) == turno ){
 					teste = goodPaths(tab, c_origem, l_origem, tab[l_origem*COL_MAX+c_origem].classe, tab[l_origem*COL_MAX+c_origem].tipo);
-					if(validatePlay(tab, input[3], input[4], teste) == 0)
+					if(validatePlay(tab, c_destino, l_destino, teste) == 0)
 						break;
 				}else{
 					printf ("entrada invalida\n");

@@ -383,7 +383,7 @@ DYNAMICVEC *posicaoDamas (BOARD *tab, int coluna, int linha, PATH *pedrascomidas
 
 //DAR FREE!!!!!!!!!!!!!!!!!!!!!!!!
 DYNAMICVEC *selectiveClean(DYNAMICVEC *vector){
-
+	
   int counter = 0;
   for(int i = 0; i < vector->size; i++)
     if(vector->vector[i].column != 0 || vector->vector[i].line != 0)
@@ -407,7 +407,7 @@ DYNAMICVEC *selectiveClean(DYNAMICVEC *vector){
 
 
 int validatePlay(BOARD *tab, int c_destino, int l_destino, DYNAMICVEC *teste){
-	for(int i = 0; i < teste->size; i++ )
+	for(int i = 0; i < teste->size; i++)
 		if(teste->vector[i].column == c_destino && teste->vector[i].line == l_destino)
 			return 1;
 
