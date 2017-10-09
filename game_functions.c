@@ -13,9 +13,9 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 
 
 	int vet[COL_MAX*LIN_MAX] = {0, 0, 0, 0, 0, 0, 0, 0,
-								0, 0, 0, 0, 2, 0, 0, 0,
+								0, 0, 2, 0, 0, 0, 0, 0,
 								0, 0, 0, 0, 0, 0, 0, 0,
-								0, 0, 0, 0, 0, 0, 0, 0,
+								0, 0, 0, 0, 1, 0, 0, 0,
 								0, 0, 0, 0, 0, 0, 0, 0,
 								0, 0, 0, 0, 0, 0, 0, 0,
 								0, 0, 1, 0, 0, 0, 0, 0,
@@ -294,8 +294,8 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 					pathResult->vector[i-2].column = Xposition + pathX[i];
 					pathResult->vector[i-2].line = Yposition + pathY[i];
 				}else{
-					pathResult->vector[i-2].column = -1;
-					pathResult->vector[i-2].line = -1;
+					pathResult->vector[i-2].column = 0;
+					pathResult->vector[i-2].line = 0;
 				}
 			}
 		}
@@ -306,13 +306,13 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 						pathResult->vector[i].column = Xposition + pathX[i];
 						pathResult->vector[i].line = Yposition + pathY[i];
 					}else{
-						pathResult->vector[i].column = -1;
-						pathResult->vector[i].line = -1;
+						pathResult->vector[i].column = 0;
+						pathResult->vector[i].line = 0;
 					}
 				}
 		}
 
-		return pathResult;
+		return selectiveClean(pathResult);
 
 	}else if(classe == 2){
 
@@ -359,8 +359,8 @@ DYNAMICVEC *posicaoDamas (BOARD *tab, int coluna, int linha, PATH *pedrascomidas
 
 	BOARD vet[COL_MAX*LIN_MAX];
 	int aux;
-	for (int l = 0; linha < LIN_MAX; l++)
-		for (int c = 0; coluna < COL_MAX; c++)
+	for (int l = 0; l < LIN_MAX; l++)
+		for (int c = 0; c < COL_MAX; c++)
 			vet[l*COL_MAX+c].tipo = tab[l*COL_MAX+c].tipo;
 
 	vet[POS].tipo = 0;
@@ -388,7 +388,7 @@ DYNAMICVEC *selectiveClean(DYNAMICVEC *vector){
 
   int counter = 0;
   for(int i = 0; i < (COL_MAX -1)*4; i++)
-    if(vector->vector[i].column == 0 && vector->vector[i].line == 0)
+    if(vector->vector[i].column != 0 && vector->vector[i].line != 0)
       counter++;
 
   DYNAMICVEC *pathResult = malloc(sizeof(DYNAMICVEC));

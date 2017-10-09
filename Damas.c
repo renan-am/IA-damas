@@ -258,6 +258,12 @@ int main (){
 
 					c_destino = input[0] - 'a';
 					l_destino = input[1] - '1';
+					DYNAMICVEC *teste;
+					teste = posicaoDamas (tab, c_origem, l_origem, maiorcaminho[track]);
+					for(int i = 0; i < teste->size; i++)
+						printf("possibilidade %d: %c %d\n", i, teste->vector[i].column + 'A',  teste->vector[i].line + 1);
+					int parada;
+					scanf("%d", &parada);
 
 					if (validar(tab, c_origem, l_origem) == turno  && validar(tab, c_destino, l_destino) == 0)
 						break;
