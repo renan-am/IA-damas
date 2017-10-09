@@ -34,6 +34,8 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 
 DYNAMICVEC *selectiveClean(DYNAMICVEC *vector);
 
+int validatePlay(BOARD *tab, int c_destino, int l_destino, DYNAMICVEC *teste);
+
 #include "game_functions.c"
 #include "funcaopracomer.c"
 #include "funcaopracomerdamas.c"

@@ -349,7 +349,7 @@ DYNAMICVEC *posicaoDamas (BOARD *tab, int coluna, int linha, PATH *pedrascomidas
 	int i, dirX, dirY, c_final, l_final;
 
 	for (i = 0; pedrascomidas[i+1].posXcomida != 0 || pedrascomidas[i+1].posYcomida != 0; i++){};
-	
+
 
 	dirX = pedrascomidas[i].posXfinal - pedrascomidas[i].posXcomida;
 	dirY = pedrascomidas[i].posYfinal - pedrascomidas[i].posYcomida;
@@ -403,4 +403,17 @@ DYNAMICVEC *selectiveClean(DYNAMICVEC *vector){
   }
 
 	return pathResult;
+}
+
+
+int validatePlay(BOARD *tab, int c_destino, int l_destino, DYNAMICVEC *teste){
+	for(int i = 0; i < teste->size; i++ )
+		if(teste->vector[i].column == c_destino && teste->vector[i].line == l_destino)
+			return 1;
+
+	for(int i = 0; i < teste->size; i++)
+			printf("possibilidade %d: %c %d\n", i, teste->vector[i].column + 'A',  teste->vector[i].line + 1);
+
+	return 0;
+
 }

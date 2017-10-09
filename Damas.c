@@ -42,69 +42,7 @@ int main (){
 		}
 
 		if (acao == 'M' || acao == 'm'){
-
-			/*	while (1){	// pede as coordenadas de ORIGEM da pedra a ser movida, em seguida checa se estao no intervalo correto e se essa coordenada representa o local de uma pedra
-							while (1){
-								printf ("Digite a coluna da pedra a ser movida: ");
-								scanf (" %d", &c_origem);
-							    getchar();
-
-								c_origem--;
-								if (c_origem >= COL_MAX || c_origem < 0)
-									printf ("Coluna invalida, tente novamente\n");
-								else
-									break;
-							}
-
-							while (1){
-								printf ("Digite a linha da pedra a ser movida: ");
-								scanf (" %d", &l_origem);
-								getchar();
-
-								l_origem--;
-								if (l_origem >= COL_MAX || l_origem < 0)
-									printf ("Linha invalida, tente novamente\n");
-								else
-									break;
-							}
-
-							if (tab[l_origem*COL_MAX+c_origem].tipo == 0)  // A coordenada indicada esta vazia
-								printf ("Nao tem pedra em Coluna: %d, Linha: %d\nDigite uma posicao valida\n", c_origem+1, l_origem+1);
-							else
-								break;
-				}
-				while (1){	// pede as coordenadas de DESTINO da pedra a ser movida, em seguida checa se ja existe uma pedra nesse local
-					while ( 1){
-						printf ("Digite a coluna de destino: ");
-						scanf (" %d", &c_destino);
-						getchar();
-						c_destino--;
-						if (c_destino >= COL_MAX || c_destino < 0)
-							printf ("Coluna invalida, tente novamente\n");
-						else
-							break;
-					}
-
-					while (1){
-						printf ("Digite a linha de destino: ");
-						scanf (" %d", &l_destino);
-						getchar();
-						l_destino--;
-						if (l_destino >= COL_MAX || l_destino < 0)
-							printf ("Coluna invalida, tente novamente\n");
-						else
-							break;
-					}
-
-					if (tab[l_destino*COL_MAX+c_destino].tipo != 0)  // A coordenada indicada esta ocupada, a pedra nao podera ser movida para ca
-						printf ("Ja tem uma pedra en Coluna: %d, Linha: %d\nDigite uma posicao valida\n", c_origem+1, l_origem+1);
-					else if ((l_destino+1)*(c_destino+1) % 2 != 0)
-						printf ("Local de destino invalido. Digite uma posicao valida\n");
-					else
-						break;
-				} //Loop de movimento
-			*/
-
+			DYNAMICVEC *teste = NULL;
 			while (1){
 				printf ("ex ('A6 B5' move pedra de A6 para B5): ");
 				fgets (input, 10, stdin);
@@ -113,7 +51,6 @@ int main (){
 					printf ("entrada invalida, por favor escreva no formato 'A1 B2'\n");
 					continue;
 				}
-
 
 				input[0] = tolower(input[0]);
 				input[3] = tolower(input[3]);
@@ -124,21 +61,15 @@ int main (){
 				c_destino = input[3] - 'a';
 				l_destino = input[4] - '1';
 
-				if (validar(tab, c_origem, l_origem) == turno  && validar(tab, c_destino, l_destino) == 0)
-					break;
-				else{
+				if (validar(tab, c_origem, l_origem) == turno ){
+					teste = goodPaths(tab, c_origem, l_origem, tab[l_origem*COL_MAX+c_origem].classe, tab[l_origem*COL_MAX+c_origem].tipo);
+					if(validatePlay(tab, input[3], input[4], teste) == 0)
+						break;
+				}else{
 					printf ("entrada invalida\n");
 				}
 			}
 
-
-			DYNAMICVEC *teste = NULL;
-			int parada;
-			teste = goodPaths(tab, c_origem, l_origem, tab[l_origem*COL_MAX+c_origem].classe, tab[l_origem*COL_MAX+c_origem].tipo);
-			for(int i = 0; i < teste->size; i++)
-				printf("possibilidade %d: %c %d\n", i, teste->vector[i].column + 'A',  teste->vector[i].line + 1);
-			scanf("%d", &parada);
-		
 			tab = GAME (c_origem, l_origem, c_destino, l_destino, NULL);
 		}
 
