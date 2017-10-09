@@ -294,8 +294,8 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 					pathResult->vector[i-2].column = Xposition + pathX[i];
 					pathResult->vector[i-2].line = Yposition + pathY[i];
 				}else{
-					pathResult->vector[i-2].column = 0;
-					pathResult->vector[i-2].line = 0;
+					pathResult->vector[i-2].column = -1;
+					pathResult->vector[i-2].line = -1;
 				}
 			}
 		}
@@ -306,13 +306,13 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 						pathResult->vector[i].column = Xposition + pathX[i];
 						pathResult->vector[i].line = Yposition + pathY[i];
 					}else{
-						pathResult->vector[i].column = 0;
-						pathResult->vector[i].line = 0;
+						pathResult->vector[i].column = -1;
+						pathResult->vector[i].line = -1;
 					}
 				}
 		}
 
-		return selectiveClean(pathResult);
+		return pathResult;
 
 	}else if(classe == 2){
 
@@ -331,7 +331,7 @@ DYNAMICVEC *goodPaths(BOARD *tab, int Xposition, int Yposition, int classe , int
 					}
 				}
 
-		return selectiveClean(pathResult);
+		return pathResult;
 
 
 	}else if(classe <= 0)
@@ -349,7 +349,8 @@ DYNAMICVEC *posicaoDamas (BOARD *tab, int coluna, int linha, PATH *pedrascomidas
 
 	int i, dirX, dirY, c_final, l_final;
 
-	for (i = 0; pedrascomidas[i+1].posXcomida == 0 && pedrascomidas[i+1].posYcomida; i++){};
+	for (i = 0; pedrascomidas[i+1].posXcomida != 0 || pedrascomidas[i+1].posYcomida != 0; i++){};
+	
 
 	dirX = pedrascomidas[i].posXfinal - pedrascomidas[i].posXcomida;
 	dirY = pedrascomidas[i].posYfinal - pedrascomidas[i].posYcomida;
@@ -369,19 +370,16 @@ DYNAMICVEC *posicaoDamas (BOARD *tab, int coluna, int linha, PATH *pedrascomidas
 
 
 	for (i = 0; i < COL_MAX; i++){
-		if (!validar(vet, c_final+(i*dirX), l_final+(i*dirY))){
+		if (validar(vet, c_final+(i*dirX), l_final+(i*dirY))){
 			break;
 		} else {
 			pathResult->vector[i].column = c_final+(i*dirX);
 			pathResult->vector[i].line = l_final+(i*dirY);
-			(pathResult->size)++;
+			pathResult->size += 1;
 		}
 	}
 
 	return pathResult;
-
-
-
 }
 
 DYNAMICVEC *selectiveClean(DYNAMICVEC *vector){
