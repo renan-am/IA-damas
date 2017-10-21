@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "func_declarations.h"
 
-BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *pedrascomidas){
+BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *pedrascomidas, int hide){
 	static int jogoiniciou = 0;     //inicializa tabuleiro somente uma vez
 	static BOARD *tabuleiro;
 
@@ -37,8 +37,10 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 
 
 		jogoiniciou = 1;
-		system ("tput reset");
-		imprimir(tabuleiro);
+		if (!hide){
+			system ("tput reset");
+			imprimir(tabuleiro);
+		}
 	}
 
 
@@ -67,9 +69,10 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 		if (tabuleiro[POS].tipo == 1 && tabuleiro[POS].classe == 1)
 			tabuleiro[POS].classe = 2;
 	}
-
-	system ("tput reset");
-	imprimir(tabuleiro);
+	if (!hide){
+		system ("tput reset");
+		imprimir(tabuleiro);
+	}
 	return tabuleiro;
 }
 

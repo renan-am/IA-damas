@@ -25,7 +25,7 @@ char checarJogada (BOARD *tab, int jogador, PIECES **usefulPieces, DYNAMICVEC *u
 
 void usefulPiecesFunction (int line, int column, PIECES **usefulPieces, DYNAMICVEC *usefulPiecesParameters);
 
-BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *pedrascomidas);
+BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *pedrascomidas, int hide);
 
 PATH **EncontrarCaminho (BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i);
 PATH **EncontrarCaminhoDama (BOARD *tabuleiro ,int posAtualX , int posAtualY, int type, int i);

@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "module.h"
-#include "func_declarations.h"
+#include "src/module.h"
+#include "src/func_declarations.h"
 
 int game = 1;
 int turno = 2;  //a vez de qual jogador, inicializar com o valor do primeiro jogador
@@ -21,7 +21,7 @@ int main (){
 	usefulPiecesParameters.capacity = 0;
 	usefulPiecesParameters.size = 0;
 
-	tab = GAME (0,0,0,0,NULL);
+	tab = GAME (0,0,0,0,NULL,0);
 
 	while (game == 1){
 
@@ -70,7 +70,7 @@ int main (){
 				}
 			}
 
-			tab = GAME (c_origem, l_origem, c_destino, l_destino, NULL);
+			tab = GAME (c_origem, l_origem, c_destino, l_destino, NULL,0);
 		}
 
 		else if (acao == 'C' || acao == 'c'){ //loop de captura
@@ -178,7 +178,7 @@ int main (){
 			}
 
 			if (tab[l_origem*COL_MAX+c_origem].classe == 1){
-				tab = GAME (c_origem, l_origem, maiorcaminho[track][i].posXfinal, maiorcaminho[track][i].posYfinal, maiorcaminho[track]);
+				tab = GAME (c_origem, l_origem, maiorcaminho[track][i].posXfinal, maiorcaminho[track][i].posYfinal, maiorcaminho[track],0);
 				free (maiorcaminho);
 			}
 			else if (tab[l_origem*COL_MAX+c_origem].classe == 2){
@@ -202,7 +202,7 @@ int main (){
 						printf ("entrada invalida\n");
 					}
 				}
-				tab = GAME (c_origem, l_origem, c_destino, l_destino, maiorcaminho[track]);
+				tab = GAME (c_origem, l_origem, c_destino, l_destino, maiorcaminho[track],0);
 				free (maiorcaminho);
 			}
 		}else{
