@@ -417,5 +417,120 @@ int validatePlay(BOARD *tab, int c_destino, int l_destino, DYNAMICVEC *teste){
 			printf("possibilidade %d: %c %d\n", i, teste->vector[i].column + 'A',  teste->vector[i].line + 1);
 
 	return 0;
+}
 
+int validateSelection (BOARD *tab, int c_destino, int l_destino, DYNAMICVEC teste, PIECES *pieces){
+	for(int i = 0; i < teste.size; i++)
+		if(pieces[i].column == c_destino && pieces[i].line == l_destino)
+			return 1;
+
+	/*for(int i = 0; i < teste.size; i++)
+			printf("possibilidade %d: %c %d\n", i, teste->vector[i].column + 'A',  teste->vector[i].line + 1);*/
+
+	return 0;
+}
+
+DYNAMICVEC *translatetoDYN (PATH **path){
+	int i, j, k;
+	int count = 0; 
+	
+	for (i = 0; i < 100; i++){
+		if (path[i][0].posXcomida == 0 && path[i][0].posYcomida == 0)
+			break;
+		for (int j = 0; j<20; j++){
+			if (path[i][j].posXcomida == 0 && path[i][j].posYcomida == 0)
+				break;
+			else
+				count++;
+		}
+	}
+
+	DYNAMICVEC *jogadas = NULL;
+	jogadas = malloc (sizeof(DYNAMICVEC));
+	jogadas->size = 2*count;
+	jogadas->capacity = 2*count;
+	jogadas->vector = calloc(2*count, sizeof(PIECES));
+
+	k = 0;
+	for (i = 0; i < 100; i++){
+		if (path[i][0].posXcomida == 0 && path[i][0].posYcomida == 0)
+				break;
+		for (int j = 0; j<20; j++){
+			if (path[i][j].posXcomida == 0 && path[i][j].posYcomida == 0){
+				break;
+			}
+			else{
+				jogadas->vector[k].column = path[i][j].posXcomida;
+				jogadas->vector[k].line = path[i][j].posYcomida;
+				k++;
+
+				jogadas->vector[k].column = path[i][j].posXfinal;
+				jogadas->vector[k].line = path[i][j].posYfinal;
+				k++;
+			}
+		}
+	}
+
+	return jogadas;
+}
+
+DYNAMICVEC *destinosDYN (PATH **path){
+	int i, j, k;
+	int old_i, old_j;
+	int count = 0; 
+	
+	for (i = 0; i < 100; i++){
+		if (path[i][0].posXcomida == 0 && path[i][0].posYcomida == 0)
+			break;
+		for (int j = 0; j<20; j++){
+			if (path[i][j].posXcomida == 0 && path[i][j].posYcomida == 0){
+				count++;
+				break;
+			}
+		}
+	}
+
+	DYNAMICVEC *jogadas = NULL;
+	jogadas = malloc (sizeof(DYNAMICVEC));
+	jogadas->size = count;
+	jogadas->capacity = count;
+	jogadas->vector = calloc(count, sizeof(PIECES));
+
+	k = 0;
+	for (i = 0; i < 100; i++){
+		if (path[i][0].posXcomida == 0 && path[i][0].posYcomida == 0)
+				break;
+
+
+		for (int j = 0, old_i = i, old_j = 0; j<20; j++){
+			if (path[i][j].posXcomida == 0 && path[i][j].posYcomida == 0){
+				jogadas->vector[k].column = old_j;
+				jogadas->vector[k].line = old_i;
+				k++;
+				break;
+			}
+			else{
+				old_i = i;
+				old_j = j;
+			}
+		}
+	}
+
+	return jogadas;
+}
+
+int findTrack (int coluna, int linha, PATH **caminho){
+	for (int i = 0; i < 100; i++){
+		if (caminho[i][0].posXcomida == 0 && caminho[i][0].posYcomida == 0)
+			break;
+
+		for (int j = 0; j < 20; j++){
+			if (caminho[i][j].posXfinal == coluna && caminho[i][j].posYfinal == linha)
+				return i;
+			else if (caminho[i][j].posXfinal == 0 && caminho[i][j].posYfinal == 0)
+				break;
+		}
+	}
+
+	return -1;
 }
