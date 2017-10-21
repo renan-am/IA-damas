@@ -12,25 +12,25 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 		posicionarpedras(tabuleiro);
 
 		/*
-	int vet[COL_MAX*LIN_MAX] = {0, 0, 0, 0, 0, 0, 0, 0,
-								0, 0, 2, 0, 0, 0, 0, 0,
-								0, 0, 0, 0, 0, 0, 0, 0,
-								0, 0, 0, 0, 1, 0, 0, 0,
-								0, 0, 0, 0, 0, 0, 0, 0,
-								0, 0, 0, 0, 0, 0, 0, 0,
-								0, 0, 1, 0, 0, 0, 0, 0,
-								0, 0, 0, 0, 0, 0, 0, 0,
-								};
+		int vet[COL_MAX*LIN_MAX] = {0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 2, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 1, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 1, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0,
+									};
 
-				for (int linha = 0; linha < LIN_MAX; linha++)
-					for (int coluna = 0; coluna < COL_MAX; coluna++){
-						tabuleiro[POS].tipo = vet[POS];
-						if (vet[POS] == 2)
-						tabuleiro[POS].classe = 1;
-						else
-						tabuleiro[POS].classe = vet[POS];
-					}
-	*/
+					for (int linha = 0; linha < LIN_MAX; linha++)
+						for (int coluna = 0; coluna < COL_MAX; coluna++){
+							tabuleiro[POS].tipo = vet[POS];
+							if (vet[POS] == 2)
+							tabuleiro[POS].classe = 1;
+							else
+							tabuleiro[POS].classe = vet[POS];
+						}
+		*/
 
 
 
