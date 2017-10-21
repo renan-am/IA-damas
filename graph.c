@@ -92,7 +92,7 @@ int main()
        }
        if (c_origem != -100 && l_origem != -100 && c_destino != -100 && l_destino != -100){
        		printf ("moveu\n");
-       		tab = GAME( c_origem,  l_origem,  c_destino,  l_destino, NULL);
+       		tab = GAME( c_origem,  l_origem,  c_destino,  l_destino, NULL, 1);
        		c_origem = -100;
 			l_origem = -100;
 			c_destino = -100;
