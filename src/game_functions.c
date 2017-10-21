@@ -500,12 +500,10 @@ DYNAMICVEC *destinosDYN (PATH **path){
 	for (i = 0; i < 100; i++){
 		if (path[i][0].posXcomida == 0 && path[i][0].posYcomida == 0)
 				break;
-
-
 		for (int j = 0, old_i = i, old_j = 0; j<20; j++){
 			if (path[i][j].posXcomida == 0 && path[i][j].posYcomida == 0){
-				jogadas->vector[k].column = old_j;
-				jogadas->vector[k].line = old_i;
+				jogadas->vector[k].column = path[old_i][old_j].posXfinal;
+				jogadas->vector[k].line = path[old_i][old_j].posYfinal;
 				k++;
 				break;
 			}

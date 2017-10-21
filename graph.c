@@ -17,6 +17,7 @@ void DrawBoard (Color *colors, int *mouseLocal, DYNAMICVEC *jogadas){
 		for (int i = 0; i < 8; i++)
     	for (int j = (i+1)%2; j < 8; j+=2)
     		{
+                //desenha um contorno ao redor da posição selecionada pelo mouse
     			if (mouseLocal[1] == i && mouseLocal[0] == j){
                		DrawRectangle(j*80, i*80, 80, 80, BLUE);
                     DrawRectangle(j*80+5, i*80+5, 70, 70, GRAY);
@@ -25,23 +26,24 @@ void DrawBoard (Color *colors, int *mouseLocal, DYNAMICVEC *jogadas){
                		DrawRectangle(j*80, i*80, 80, 80, colors[1]);  
     		}
 }		
-
+// desenha peças/damas
+// ADICIONAR paths para poder dar highlight na pedras que vao ser capturaradas
 void DrawPieces (BOARD *tab){
 	for (int i = 0; i < 8; i++)
         for (int j = 0; j < 8; j++){
         	if (tab[i*8+j].tipo == 1){
-                if (tab[i*8+j].classe == 1)
+                if (tab[i*8+j].classe == 1) //peao
         		    DrawCircle( j*80+40,i*80+40, 35, RED);
-                if (tab[i*8+j].classe == 2){
+                if (tab[i*8+j].classe == 2){ //damas
                     DrawCircle( j*80+40,i*80+40, 35, YELLOW);
                     DrawCircle( j*80+40,i*80+40, 25, RED);
 
                 }
             }
         	else if (tab[i*8+j].tipo == 2){
-        		if (tab[i*8+j].classe == 1)
+        		if (tab[i*8+j].classe == 1) //peao
                     DrawCircle( j*80+40,i*80+40, 35, GREEN);
-                if (tab[i*8+j].classe == 2){
+                if (tab[i*8+j].classe == 2){ //damas
                     DrawCircle( j*80+40,i*80+40, 35, YELLOW);
                     DrawCircle( j*80+40,i*80+40, 25, GREEN);
 
@@ -50,8 +52,10 @@ void DrawPieces (BOARD *tab){
         }  
 }
 
+//desenha peça selecionada e casas que ela pode se mover
 void DrawMoveHighlights (int c_origem, int l_origem, Color *colors, int *mouseLocal, DYNAMICVEC *jogadas){
     if (jogadas){
+        // highlight de todas as posições que ela pode ir
         for (int i = 0; i < jogadas->size; i++){
             DrawRectangle(jogadas->vector[i].column*80, jogadas->vector[i].line*80, 80, 80, BLUE);
             DrawRectangle(jogadas->vector[i].column*80+5, jogadas->vector[i].line*80+5, 70, 70, colors[1]);  
@@ -61,13 +65,16 @@ void DrawMoveHighlights (int c_origem, int l_origem, Color *colors, int *mouseLo
         }
     }
 
+    // highlight da peça selecionada
     DrawRectangle(c_origem*80, l_origem*80, 80, 80, SKYBLUE);
     DrawRectangle(c_origem*80+5, l_origem*80+5, 70, 70, colors[1]);  
 
+    // muda o tipo de highlight causado por passar o mouse por cima da peça selecionada
     if (mouseLocal[1] == l_origem && mouseLocal[0] == c_origem)
         DrawRectangle(c_origem*80+5, l_origem*80+5, 70, 70, GRAY);
 }
 
+// highlight das peças que podem capturar
 void DrawPiecesHighlights (Color *colors, int *mouseLocal, PIECES *pieces, DYNAMICVEC piecesParameters){
     if (pieces){
          for (int i = 0; i < piecesParameters.size; i++){
@@ -80,15 +87,14 @@ void DrawPiecesHighlights (Color *colors, int *mouseLocal, PIECES *pieces, DYNAM
     }
 }
 
+// highlight dos caminho de capturar de uma peça
 void DrawTargetHighlights (BOARD *tab, int c_origem,int l_origem, Color *colors, int *mouseLocal, DYNAMICVEC *jogadas){
-     if (jogadas){
+    if (jogadas){
         for (int i = 0; i < jogadas->size; i++){
             if (tab[jogadas->vector[i].line*8+jogadas->vector[i].column].tipo > 0){
-               DrawLine(jogadas->vector[i].column, jogadas->vector[i].line, jogadas->vector[i].column + 80, jogadas->vector[i].line + 80, BLACK);
-               DrawLine(jogadas->vector[i].column + 80, jogadas->vector[i].line, jogadas->vector[i].column, jogadas->vector[i].line + 80, BLACK);
+               DrawLine(jogadas->vector[i].column*80, jogadas->vector[i].line*80, jogadas->vector[i].column*80 + 80, jogadas->vector[i].line*80 + 80, BLACK);
+               DrawLine(jogadas->vector[i].column*80 + 80, jogadas->vector[i].line*80, jogadas->vector[i].column*80, jogadas->vector[i].line*80 + 80, BLACK);
             }
-
-
 
             DrawRectangle(jogadas->vector[i].column*80, jogadas->vector[i].line*80, 80, 80, BLUE);
             DrawRectangle(jogadas->vector[i].column*80+5, jogadas->vector[i].line*80+5, 70, 70, colors[1]);  
@@ -150,6 +156,7 @@ int main()
         // Update
         //----------------------------------------------------------------------------------
 
+        // pega posição do mouse já convertendo pra linhas/coluna do tabuleiro
         mouseLocal[0] = GetMouseX()/80;
         mouseLocal[1] = GetMouseY()/80;
 
@@ -207,6 +214,8 @@ int main()
 
             EndDrawing();
         } else if (acao == 'c') {
+
+            // pega os inputs
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
                 if (c_origem == -100 && l_origem == -100){
                     if (tab[mouseLocal[1]*8+mouseLocal[0]].tipo == turno  
@@ -243,8 +252,9 @@ int main()
                 printf ("origem (x:%d,y:%d) destino (x:%d,y:%d)\n", c_origem, l_origem, c_destino, l_destino);
             }
 
+            // depois de pegar todos inputs, checa se a jogada é valida, se for chama game, depois reseta os inputs
             if (c_origem != -100 && l_origem != -100 && c_destino != -100 && l_destino != -100){
-                if (validatePlay(tab, c_destino, l_destino, paths)){
+                if (validatePlay(tab, c_destino, l_destino, destinos)){
                     int track = findTrack (c_destino, l_destino, caminho);
                     printf ("track = %d\n", track);
                     if (track > -1)
@@ -279,6 +289,8 @@ int main()
                 DrawPieces(tab);  
 
             EndDrawing();
+
+
         } else {
             break;
         }
