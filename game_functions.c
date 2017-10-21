@@ -9,9 +9,9 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 
 	if (!jogoiniciou){
 		tabuleiro = calloc (COL_MAX*LIN_MAX, sizeof(BOARD));
-	//	posicionarpedras(tabuleiro);
+		posicionarpedras(tabuleiro);
 
-
+		/*
 	int vet[COL_MAX*LIN_MAX] = {0, 0, 0, 0, 0, 0, 0, 0,
 								0, 0, 2, 0, 0, 0, 0, 0,
 								0, 0, 0, 0, 0, 0, 0, 0,
@@ -30,7 +30,7 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 						else
 						tabuleiro[POS].classe = vet[POS];
 					}
-
+	*/
 
 
 
@@ -73,7 +73,6 @@ BOARD *GAME (int c_origem, int l_origem, int c_destino, int l_destino, PATH *ped
 	return tabuleiro;
 }
 
-
 void posicionarpedras (BOARD *tab){   //inicializa o tabuleiro, com pedras tipo 1 na parte superior e tipo 2 na parte inferior
 	int linha, coluna;
 
@@ -96,9 +95,10 @@ void posicionarpedras (BOARD *tab){   //inicializa o tabuleiro, com pedras tipo 
 
 		}
 	for (linha = 0; linha < LIN_MAX; linha++)
-			for (coluna = linha%2; coluna < COL_MAX; coluna += 2)
-				tab[POS].tipo = -1;
-				tab[POS].classe = -1;
+		for (coluna = linha%2; coluna < COL_MAX; coluna += 2){
+			tab[POS].tipo = -1;
+			tab[POS].classe = -1;
+		}
 }
 
 void mover (BOARD *tab, int c_origem, int l_origem, int c_destino, int l_destino){    //move pedra da posicao de origem para a posiçao destino no tabuleiro *tab
@@ -404,7 +404,6 @@ DYNAMICVEC *selectiveClean(DYNAMICVEC *vector){
 
 	return pathResult;
 }
-
 
 int validatePlay(BOARD *tab, int c_destino, int l_destino, DYNAMICVEC *teste){
 	for(int i = 0; i < teste->size; i++)
